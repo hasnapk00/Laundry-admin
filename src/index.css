@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{
+    --primary:#E8A843;
+    --primary-hover:#D99A2E;
+
+    --dark:#231F20;
+
+    --cream:#F4EFD9;
+
+    --background:#FAF8F1;
+
+    --surface:#FFFFFF;
+
+    --border:#E7E5E4;
+
+    --text:#231F20;
+
+    --text-secondary:#6B7280;
+
+    --success:#22C55E;
+
+    --warning:#F59E0B;
+
+    --danger:#EF4444;
+
+    --info:#3B82F6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#FAF8F1;
+    color:#231F20;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body{
+    background:#121212;
+    color:#f3f4f6;
+}
+
+button{
+    cursor:pointer;
+}
+
+input,
+button,
+textarea,
+select{
+    font:inherit;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+ul{
+    list-style:none;
+}
+
+/* Hide scrollbars globally */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

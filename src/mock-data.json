@@ -1,0 +1,1355 @@
+{
+  "customers": [
+    {
+  "id": "CUST001",
+  "name": "Rahul Sharma",
+  "phone": "+91 9876543210",
+  "email": "rahul.sharma@gmail.com",
+
+  "addresses": [
+    {
+      "id": "ADDR001",
+      "type": "Home",
+      "address": "MG Road, Malappuram, Kerala",
+      "landmark": "Near KSRTC Bus Stand",
+      "pincode": "676505",
+      "is_default": true
+    },
+    {
+      "id": "ADDR002",
+      "type": "Work",
+      "address": "Tech Park, Calicut Road, Malappuram",
+      "landmark": "Opp. Lulu Hypermarket",
+      "pincode": "676504",
+      "is_default": false
+    }
+  ],
+
+  "member_since": "12 Jan 2025",
+  "status": "Active",
+  "isLoggedIn": true,
+
+  "total_orders": 12,
+  "completed_orders": 10,
+  "pending_orders": 2,
+
+  "total_spent": 8400,
+  "paid_amount": 7800,
+  "pending_amount": 600,
+  "refunded_amount": 0,
+
+  "recent_orders": [
+    {
+      "id": "ORD1001",
+      "service": "Wash & Iron",
+      "amount": 538,
+      "status": "Pending",
+      "date": "17 Jul 2026"
+    },
+    {
+      "id": "ORD1006",
+      "service": "Dry Clean",
+      "amount": 620,
+      "status": "Delivered",
+      "date": "02 Jul 2026"
+    }
+  ]
+},
+    {
+      "id": "CUST002",
+      "name": "Priya Nair",
+      "phone": "+91 9847012345",
+      "email": "priya.nair@gmail.com",
+      "address": "Beach Road, Kozhikode, Kerala",
+      "member_since": "03 Mar 2025",
+      "status": "Active",
+      "isLoggedIn": true,
+      "total_orders": 8,
+      "completed_orders": 7,
+      "pending_orders": 1,
+      "total_spent": 5460,
+      "paid_amount": 5460,
+      "pending_amount": 0,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1002",
+          "service": "Steam Press",
+          "amount": 310,
+          "status": "Washing",
+          "date": "18 Jul 2026"
+        },
+        {
+          "id": "ORD1007",
+          "service": "Wash & Fold",
+          "amount": 275,
+          "status": "Delivered",
+          "date": "28 Jun 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST003",
+      "name": "Arjun Menon",
+      "phone": "+91 9633021456",
+      "email": "arjun.menon@outlook.com",
+      "address": "Civil Station Road, Kannur, Kerala",
+      "member_since": "20 May 2025",
+      "status": "Active",
+      "isLoggedIn": true,
+      "total_orders": 5,
+      "completed_orders": 4,
+      "pending_orders": 1,
+      "total_spent": 3120,
+      "paid_amount": 2820,
+      "pending_amount": 300,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1003",
+          "service": "Premium Wash",
+          "amount": 890,
+          "status": "Out for Delivery",
+          "date": "19 Jul 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST004",
+      "name": "Sneha Pillai",
+      "phone": "+91 9744556677",
+      "email": "sneha.pillai@yahoo.com",
+      "address": "Vytilla, Kochi, Kerala",
+      "member_since": "11 Aug 2025",
+      "status": "Inactive",
+      "isLoggedIn": true,
+      "total_orders": 3,
+      "completed_orders": 3,
+      "pending_orders": 0,
+      "total_spent": 1740,
+      "paid_amount": 1740,
+      "pending_amount": 0,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1008",
+          "service": "Ironing",
+          "amount": 180,
+          "status": "Delivered",
+          "date": "15 Jun 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST005",
+      "name": "Vishnu Kumar",
+      "phone": "+91 9895112233",
+      "email": "vishnu.kumar@gmail.com",
+      "address": "Pattom, Thiruvananthapuram, Kerala",
+      "member_since": "02 Feb 2026",
+      "status": "Active",
+      "isLoggedIn": true,
+      "total_orders": 6,
+      "completed_orders": 5,
+      "pending_orders": 1,
+      "total_spent": 4230,
+      "paid_amount": 3980,
+      "pending_amount": 250,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1004",
+          "service": "Shoe Cleaning",
+          "amount": 250,
+          "status": "Ready",
+          "date": "19 Jul 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST006",
+      "name": "Divya Raj",
+      "phone": "+91 9567788990",
+      "email": "divya.raj@gmail.com",
+      "address": "Fort Kochi, Ernakulam, Kerala",
+      "member_since": "27 Sep 2025",
+      "status": "Pending",
+      "isLoggedIn": true,
+      "total_orders": 2,
+      "completed_orders": 1,
+      "pending_orders": 1,
+      "total_spent": 940,
+      "paid_amount": 420,
+      "pending_amount": 520,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1009",
+          "service": "Carpet Cleaning",
+          "amount": 520,
+          "status": "Accepted",
+          "date": "20 Jul 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST007",
+      "name": "Anoop Krishnan",
+      "phone": "+91 9384756120",
+      "email": "anoop.krishnan@gmail.com",
+      "address": "Palayam, Thiruvananthapuram, Kerala",
+      "member_since": "14 Nov 2025",
+      "status": "Active",
+      "isLoggedIn": true,
+      "total_orders": 9,
+      "completed_orders": 8,
+      "pending_orders": 1,
+      "total_spent": 6650,
+      "paid_amount": 6300,
+      "pending_amount": 350,
+      "refunded_amount": 0,
+      "recent_orders": [
+        {
+          "id": "ORD1005",
+          "service": "Curtain Cleaning",
+          "amount": 740,
+          "status": "Drying",
+          "date": "19 Jul 2026"
+        }
+      ]
+    },
+    {
+      "id": "CUST008",
+      "name": "Meera Thomas",
+      "phone": "+91 9020304050",
+      "email": "meera.thomas@gmail.com",
+      "address": "MG Road, Kottayam, Kerala",
+      "member_since": "08 Apr 2025",
+      "status": "Active",
+      "isLoggedIn": true,
+      "total_orders": 4,
+      "completed_orders": 4,
+      "pending_orders": 0,
+      "total_spent": 2680,
+      "paid_amount": 2680,
+      "pending_amount": 0,
+      "refunded_amount": 120,
+      "recent_orders": [
+        {
+          "id": "ORD1010",
+          "service": "Dry Clean",
+          "amount": 460,
+          "status": "Delivered",
+          "date": "10 Jul 2026"
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD1001",
+      "customer": "Rahul Sharma",
+      "phone": "+91 9876543210",
+      "email": "rahul.sharma@gmail.com",
+      "address": "MG Road, Malappuram, Kerala",
+      "orderDate": "17 Jul 2026",
+      "pickupDate": "18 Jul 2026",
+      "deliveryDate": "20 Jul 2026",
+      "status": "Pending",
+      "service": "Wash & Iron",
+      "amount": 538,
+      "paymentMethod": "UPI",
+      "paymentStatus": "Paid",
+      "subtotal": 570,
+      "discount": 50,
+      "tax": 18,
+      "total": 538,
+      "updatedAt": "2 hours ago",
+      "pickupAddress": "MG Road, Malappuram, Kerala",
+      "deliveryAddress": "MG Road, Malappuram, Kerala",
+      "expectedDelivery": "20 Jul 2026, 6:00 PM",
+      "services": [
+        {
+          "service": "Wash & Iron",
+          "quantity": 8,
+          "amount": 420
+        },
+        {
+          "service": "Dry Clean",
+          "quantity": 2,
+          "amount": 150
+        }
+      ],
+      "servicesTotal": 570,
+      "items": [
+        {
+          "id": 1,
+          "item": "Shirt",
+          "service": "Wash & Iron",
+          "quantity": 5,
+          "price": 30,
+          "total": 150
+        },
+        {
+          "id": 2,
+          "item": "Pant",
+          "service": "Dry Clean",
+          "quantity": 2,
+          "price": 75,
+          "total": 150
+        },
+        {
+          "id": 3,
+          "item": "Bedsheet",
+          "service": "Wash Only",
+          "quantity": 2,
+          "price": 60,
+          "total": 120
+        }
+      ]
+    },
+    {
+      "id": "ORD1002",
+      "customer": "Priya Nair",
+      "phone": "+91 9847012345",
+      "email": "priya.nair@gmail.com",
+      "address": "Beach Road, Kozhikode, Kerala",
+      "orderDate": "18 Jul 2026",
+      "pickupDate": "18 Jul 2026",
+      "deliveryDate": "21 Jul 2026",
+      "status": "Washing",
+      "service": "Steam Press",
+      "amount": 310,
+      "paymentMethod": "Cash",
+      "paymentStatus": "Pending",
+      "subtotal": 300,
+      "discount": 0,
+      "tax": 10,
+      "total": 310,
+      "updatedAt": "5 hours ago",
+      "pickupAddress": "Beach Road, Kozhikode, Kerala",
+      "deliveryAddress": "Beach Road, Kozhikode, Kerala",
+      "expectedDelivery": "21 Jul 2026, 5:00 PM",
+      "services": [
+        {
+          "service": "Steam Press",
+          "quantity": 6,
+          "amount": 300
+        }
+      ],
+      "servicesTotal": 300,
+      "items": [
+        {
+          "id": 1,
+          "item": "Saree",
+          "service": "Steam Press",
+          "quantity": 3,
+          "price": 60,
+          "total": 180
+        },
+        {
+          "id": 2,
+          "item": "Kurta",
+          "service": "Steam Press",
+          "quantity": 3,
+          "price": 40,
+          "total": 120
+        }
+      ]
+    },
+    {
+      "id": "ORD1003",
+      "customer": "Arjun Menon",
+      "phone": "+91 9633021456",
+      "email": "arjun.menon@outlook.com",
+      "address": "Civil Station Road, Kannur, Kerala",
+      "orderDate": "16 Jul 2026",
+      "pickupDate": "16 Jul 2026",
+      "deliveryDate": "19 Jul 2026",
+      "status": "Out for Delivery",
+      "service": "Premium Wash",
+      "amount": 890,
+      "paymentMethod": "Card",
+      "paymentStatus": "Paid",
+      "subtotal": 850,
+      "discount": 40,
+      "tax": 80,
+      "total": 890,
+      "updatedAt": "30 minutes ago",
+      "pickupAddress": "Civil Station Road, Kannur, Kerala",
+      "deliveryAddress": "Civil Station Road, Kannur, Kerala",
+      "expectedDelivery": "19 Jul 2026, 7:00 PM",
+      "services": [
+        {
+          "service": "Premium Wash",
+          "quantity": 10,
+          "amount": 850
+        }
+      ],
+      "servicesTotal": 850,
+      "items": [
+        {
+          "id": 1,
+          "item": "Blazer",
+          "service": "Premium Wash",
+          "quantity": 1,
+          "price": 250,
+          "total": 250
+        },
+        {
+          "id": 2,
+          "item": "Suit",
+          "service": "Premium Wash",
+          "quantity": 1,
+          "price": 350,
+          "total": 350
+        },
+        {
+          "id": 3,
+          "item": "Trousers",
+          "service": "Premium Wash",
+          "quantity": 5,
+          "price": 50,
+          "total": 250
+        }
+      ]
+    },
+    {
+      "id": "ORD1004",
+      "customer": "Vishnu Kumar",
+      "phone": "+91 9895112233",
+      "email": "vishnu.kumar@gmail.com",
+      "address": "Pattom, Thiruvananthapuram, Kerala",
+      "orderDate": "17 Jul 2026",
+      "pickupDate": "17 Jul 2026",
+      "deliveryDate": "19 Jul 2026",
+      "status": "Ready",
+      "service": "Shoe Cleaning",
+      "amount": 250,
+      "paymentMethod": "UPI",
+      "paymentStatus": "Paid",
+      "subtotal": 250,
+      "discount": 0,
+      "tax": 0,
+      "total": 250,
+      "updatedAt": "1 hour ago",
+      "pickupAddress": "Pattom, Thiruvananthapuram, Kerala",
+      "deliveryAddress": "Pattom, Thiruvananthapuram, Kerala",
+      "expectedDelivery": "19 Jul 2026, 4:00 PM",
+      "services": [
+        {
+          "service": "Shoe Cleaning",
+          "quantity": 2,
+          "amount": 250
+        }
+      ],
+      "servicesTotal": 250,
+      "items": [
+        {
+          "id": 1,
+          "item": "Sneakers",
+          "service": "Shoe Cleaning",
+          "quantity": 2,
+          "price": 125,
+          "total": 250
+        }
+      ]
+    },
+    {
+      "id": "ORD1005",
+      "customer": "Anoop Krishnan",
+      "phone": "+91 9384756120",
+      "email": "anoop.krishnan@gmail.com",
+      "address": "Palayam, Thiruvananthapuram, Kerala",
+      "orderDate": "18 Jul 2026",
+      "pickupDate": "18 Jul 2026",
+      "deliveryDate": "22 Jul 2026",
+      "status": "Drying",
+      "service": "Curtain Cleaning",
+      "amount": 740,
+      "paymentMethod": "Net Banking",
+      "paymentStatus": "Paid",
+      "subtotal": 700,
+      "discount": 20,
+      "tax": 60,
+      "total": 740,
+      "updatedAt": "4 hours ago",
+      "pickupAddress": "Palayam, Thiruvananthapuram, Kerala",
+      "deliveryAddress": "Palayam, Thiruvananthapuram, Kerala",
+      "expectedDelivery": "22 Jul 2026, 6:00 PM",
+      "services": [
+        {
+          "service": "Curtain Cleaning",
+          "quantity": 4,
+          "amount": 700
+        }
+      ],
+      "servicesTotal": 700,
+      "items": [
+        {
+          "id": 1,
+          "item": "Curtain Panel",
+          "service": "Curtain Cleaning",
+          "quantity": 4,
+          "price": 175,
+          "total": 700
+        }
+      ]
+    },
+    {
+      "id": "ORD1006",
+      "customer": "Rahul Sharma",
+      "phone": "+91 9876543210",
+      "email": "rahul.sharma@gmail.com",
+      "address": "MG Road, Malappuram, Kerala",
+      "orderDate": "01 Jul 2026",
+      "pickupDate": "01 Jul 2026",
+      "deliveryDate": "02 Jul 2026",
+      "status": "Delivered",
+      "service": "Dry Clean",
+      "amount": 620,
+      "paymentMethod": "UPI",
+      "paymentStatus": "Paid",
+      "subtotal": 600,
+      "discount": 0,
+      "tax": 20,
+      "total": 620,
+      "updatedAt": "20 days ago",
+      "pickupAddress": "MG Road, Malappuram, Kerala",
+      "deliveryAddress": "MG Road, Malappuram, Kerala",
+      "expectedDelivery": "02 Jul 2026, 5:00 PM",
+      "services": [
+        {
+          "service": "Dry Clean",
+          "quantity": 4,
+          "amount": 600
+        }
+      ],
+      "servicesTotal": 600,
+      "items": [
+        {
+          "id": 1,
+          "item": "Jacket",
+          "service": "Dry Clean",
+          "quantity": 2,
+          "price": 150,
+          "total": 300
+        },
+        {
+          "id": 2,
+          "item": "Coat",
+          "service": "Dry Clean",
+          "quantity": 2,
+          "price": 150,
+          "total": 300
+        }
+      ]
+    },
+    {
+      "id": "ORD1007",
+      "customer": "Priya Nair",
+      "phone": "+91 9847012345",
+      "email": "priya.nair@gmail.com",
+      "address": "Beach Road, Kozhikode, Kerala",
+      "orderDate": "27 Jun 2026",
+      "pickupDate": "27 Jun 2026",
+      "deliveryDate": "28 Jun 2026",
+      "status": "Delivered",
+      "service": "Wash & Fold",
+      "amount": 275,
+      "paymentMethod": "Cash",
+      "paymentStatus": "Paid",
+      "subtotal": 275,
+      "discount": 0,
+      "tax": 0,
+      "total": 275,
+      "updatedAt": "24 days ago",
+      "pickupAddress": "Beach Road, Kozhikode, Kerala",
+      "deliveryAddress": "Beach Road, Kozhikode, Kerala",
+      "expectedDelivery": "28 Jun 2026, 5:00 PM",
+      "services": [
+        {
+          "service": "Wash & Fold",
+          "quantity": 5,
+          "amount": 275
+        }
+      ],
+      "servicesTotal": 275,
+      "items": [
+        {
+          "id": 1,
+          "item": "T-Shirt",
+          "service": "Wash & Fold",
+          "quantity": 5,
+          "price": 55,
+          "total": 275
+        }
+      ]
+    },
+    {
+      "id": "ORD1008",
+      "customer": "Sneha Pillai",
+      "phone": "+91 9744556677",
+      "email": "sneha.pillai@yahoo.com",
+      "address": "Vytilla, Kochi, Kerala",
+      "orderDate": "14 Jun 2026",
+      "pickupDate": "14 Jun 2026",
+      "deliveryDate": "15 Jun 2026",
+      "status": "Delivered",
+      "service": "Ironing",
+      "amount": 180,
+      "paymentMethod": "UPI",
+      "paymentStatus": "Paid",
+      "subtotal": 180,
+      "discount": 0,
+      "tax": 0,
+      "total": 180,
+      "updatedAt": "38 days ago",
+      "pickupAddress": "Vytilla, Kochi, Kerala",
+      "deliveryAddress": "Vytilla, Kochi, Kerala",
+      "expectedDelivery": "15 Jun 2026, 4:00 PM",
+      "services": [
+        {
+          "service": "Ironing",
+          "quantity": 6,
+          "amount": 180
+        }
+      ],
+      "servicesTotal": 180,
+      "items": [
+        {
+          "id": 1,
+          "item": "Shirt",
+          "service": "Ironing",
+          "quantity": 6,
+          "price": 30,
+          "total": 180
+        }
+      ]
+    },
+    {
+      "id": "ORD1009",
+      "customer": "Divya Raj",
+      "phone": "+91 9567788990",
+      "email": "divya.raj@gmail.com",
+      "address": "Fort Kochi, Ernakulam, Kerala",
+      "orderDate": "20 Jul 2026",
+      "pickupDate": "21 Jul 2026",
+      "deliveryDate": "23 Jul 2026",
+      "status": "Accepted",
+      "service": "Carpet Cleaning",
+      "amount": 520,
+      "paymentMethod": "UPI",
+      "paymentStatus": "Pending",
+      "subtotal": 500,
+      "discount": 0,
+      "tax": 20,
+      "total": 520,
+      "updatedAt": "10 minutes ago",
+      "pickupAddress": "Fort Kochi, Ernakulam, Kerala",
+      "deliveryAddress": "Fort Kochi, Ernakulam, Kerala",
+      "expectedDelivery": "23 Jul 2026, 6:00 PM",
+      "services": [
+        {
+          "service": "Carpet Cleaning",
+          "quantity": 1,
+          "amount": 500
+        }
+      ],
+      "servicesTotal": 500,
+      "items": [
+        {
+          "id": 1,
+          "item": "Living Room Carpet",
+          "service": "Carpet Cleaning",
+          "quantity": 1,
+          "price": 500,
+          "total": 500
+        }
+      ]
+    },
+    {
+      "id": "ORD1010",
+      "customer": "Meera Thomas",
+      "phone": "+91 9020304050",
+      "email": "meera.thomas@gmail.com",
+      "address": "MG Road, Kottayam, Kerala",
+      "orderDate": "09 Jul 2026",
+      "pickupDate": "09 Jul 2026",
+      "deliveryDate": "10 Jul 2026",
+      "status": "Delivered",
+      "service": "Dry Clean",
+      "amount": 460,
+      "paymentMethod": "Card",
+      "paymentStatus": "Paid",
+      "subtotal": 460,
+      "discount": 0,
+      "tax": 0,
+      "total": 460,
+      "updatedAt": "12 days ago",
+      "pickupAddress": "MG Road, Kottayam, Kerala",
+      "deliveryAddress": "MG Road, Kottayam, Kerala",
+      "expectedDelivery": "10 Jul 2026, 5:00 PM",
+      "services": [
+        {
+          "service": "Dry Clean",
+          "quantity": 3,
+          "amount": 460
+        }
+      ],
+      "servicesTotal": 460,
+      "items": [
+        {
+          "id": 1,
+          "item": "Saree",
+          "service": "Dry Clean",
+          "quantity": 1,
+          "price": 200,
+          "total": 200
+        },
+        {
+          "id": 2,
+          "item": "Blouse",
+          "service": "Dry Clean",
+          "quantity": 2,
+          "price": 130,
+          "total": 260
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Wash & Iron",
+      "description": "Regular washing combined with ironing for everyday garments.",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Dry Clean",
+      "description": "Professional dry cleaning for delicate and formal wear.",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Wash Only",
+      "description": "Machine wash without ironing, best for bulk laundry.",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "Iron Only",
+      "description": "Ironing and pressing service for already washed clothes.",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Steam Press",
+      "description": "Steam finishing for a crisp, wrinkle-free look.",
+      "status": "Inactive"
+    },
+    {
+      "id": 6,
+      "name": "Premium",
+      "description": "Premium care for suits, blazers, and designer wear.",
+      "status": "Active"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "Wash & Fold",
+      "category": "Wash Only",
+      "unit": "Per Kg",
+      "price": 55,
+      "discount": 0,
+      "tax": 0,
+      "description": "Everyday laundry washed and neatly folded.",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Dry Cleaning",
+      "category": "Dry Clean",
+      "unit": "Per Piece",
+      "price": 150,
+      "discount": 20,
+      "tax": 10,
+      "description": "Gentle dry cleaning for delicate fabrics.",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Ironing",
+      "category": "Iron Only",
+      "unit": "Per Piece",
+      "price": 30,
+      "discount": 0,
+      "tax": 0,
+      "description": "Quick pressing for a sharp finish.",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "Steam Press",
+      "category": "Steam Press",
+      "unit": "Per Piece",
+      "price": 40,
+      "discount": 0,
+      "tax": 0,
+      "description": "Steam finishing for wrinkle-free clothes.",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Premium Wash",
+      "category": "Premium",
+      "unit": "Per Piece",
+      "price": 250,
+      "discount": 30,
+      "tax": 25,
+      "description": "High-end care for suits and blazers.",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "name": "Shoe Cleaning",
+      "category": "Wash Only",
+      "unit": "Per Pair",
+      "price": 125,
+      "discount": 0,
+      "tax": 0,
+      "description": "Deep cleaning for sneakers and formal shoes.",
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "name": "Carpet Cleaning",
+      "category": "Wash Only",
+      "unit": "Per Item",
+      "price": 500,
+      "discount": 0,
+      "tax": 20,
+      "description": "Deep shampoo wash for carpets and rugs.",
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "name": "Curtain Cleaning",
+      "category": "Dry Clean",
+      "unit": "Per Item",
+      "price": 175,
+      "discount": 0,
+      "tax": 0,
+      "description": "Dust and stain removal for curtains.",
+      "status": "Active"
+    },
+    {
+      "id": 9,
+      "name": "Blanket Wash",
+      "category": "Wash Only",
+      "unit": "Per Item",
+      "price": 220,
+      "discount": 0,
+      "tax": 0,
+      "description": "Deep wash for heavy blankets and quilts.",
+      "status": "Inactive"
+    },
+    {
+      "id": 10,
+      "name": "Saree Dry Clean",
+      "category": "Premium",
+      "unit": "Per Piece",
+      "price": 200,
+      "discount": 0,
+      "tax": 15,
+      "description": "Specialised dry cleaning for sarees.",
+      "status": "Active"
+    }
+  ],
+  "packages": [
+    {
+      "id": "PKG001",
+      "name": "Family Package",
+      "description": "Ideal for families — covers wash, iron, and dry cleaning for the month.",
+      "services": [
+        "Wash & Fold",
+        "Ironing",
+        "Dry Cleaning"
+      ],
+      "originalPrice": 1500,
+      "packagePrice": 1199,
+      "status": "Active",
+      "purchased": 42
+    },
+    {
+      "id": "PKG002",
+      "name": "Bachelor Package",
+      "description": "Budget-friendly weekly wash and fold plan for singles.",
+      "services": [
+        "Wash & Fold",
+        "Ironing"
+      ],
+      "originalPrice": 800,
+      "packagePrice": 649,
+      "status": "Active",
+      "purchased": 67
+    },
+    {
+      "id": "PKG003",
+      "name": "Premium Package",
+      "description": "Top-tier care for suits, sarees, and delicate fabrics.",
+      "services": [
+        "Premium Wash",
+        "Dry Cleaning",
+        "Steam Press"
+      ],
+      "originalPrice": 2500,
+      "packagePrice": 1999,
+      "status": "Active",
+      "purchased": 18
+    },
+    {
+      "id": "PKG004",
+      "name": "Office Package",
+      "description": "Daily shirt and trouser pressing for working professionals.",
+      "services": [
+        "Ironing",
+        "Steam Press"
+      ],
+      "originalPrice": 600,
+      "packagePrice": 449,
+      "status": "Inactive",
+      "purchased": 9
+    },
+    {
+      "id": "PKG005",
+      "name": "Home Care Package",
+      "description": "Carpets, curtains, and blankets — refreshed every quarter.",
+      "services": [
+        "Carpet Cleaning",
+        "Curtain Cleaning"
+      ],
+      "originalPrice": 1800,
+      "packagePrice": 1399,
+      "status": "Active",
+      "purchased": 12
+    }
+  ],
+  "offers": [
+    {
+      "id": "OFF001",
+      "name": "New Customer Discount",
+      "type": "Percentage",
+      "discount": "20%",
+      "minOrderAmount": 300,
+      "applicableServices": [
+        "Wash & Fold",
+        "Ironing"
+      ],
+      "startDate": "2026-07-01",
+      "endDate": "2026-07-31",
+      "status": "Active",
+      "description": "Flat 20% off for first-time customers.",
+      "redeemed": 134
+    },
+    {
+      "id": "OFF002",
+      "name": "Weekend Special",
+      "type": "Flat",
+      "discount": "₹100",
+      "minOrderAmount": 500,
+      "applicableServices": [
+        "Dry Cleaning",
+        "Premium Wash"
+      ],
+      "startDate": "2026-07-18",
+      "endDate": "2026-07-20",
+      "status": "Active",
+      "description": "Flat ₹100 off on weekend orders above ₹500.",
+      "redeemed": 58
+    },
+    {
+      "id": "OFF003",
+      "name": "Bulk Order Offer",
+      "type": "Percentage",
+      "discount": "15%",
+      "minOrderAmount": 1000,
+      "applicableServices": [
+        "Wash & Fold",
+        "Steam Press"
+      ],
+      "startDate": "2026-08-01",
+      "endDate": "2026-08-15",
+      "status": "Scheduled",
+      "description": "Save more on bulk laundry orders.",
+      "redeemed": 0
+    },
+    {
+      "id": "OFF004",
+      "name": "Festive Offer",
+      "type": "Flat",
+      "discount": "₹150",
+      "minOrderAmount": 700,
+      "applicableServices": [
+        "Dry Cleaning",
+        "Shoe Cleaning"
+      ],
+      "startDate": "2026-06-01",
+      "endDate": "2026-06-30",
+      "status": "Expired",
+      "description": "Festive season laundry discount.",
+      "redeemed": 212
+    },
+    {
+      "id": "OFF005",
+      "name": "Referral Bonus",
+      "type": "Percentage",
+      "discount": "10%",
+      "minOrderAmount": 200,
+      "applicableServices": [
+        "Wash & Fold",
+        "Dry Cleaning",
+        "Ironing"
+      ],
+      "startDate": "2026-07-01",
+      "endDate": "2026-12-31",
+      "status": "Active",
+      "description": "10% off when referred by an existing customer.",
+      "redeemed": 76
+    }
+  ],
+  "pickups": [
+    {
+      "id": 1,
+      "pickup_id": "PU2001",
+      "order_id": "ORD1009",
+      "customer_name": "Divya Raj",
+      "phone": "+91 9567788990",
+      "pickup_date": "21 Jul 2026",
+      "pickup_time": "10:00 AM - 12:00 PM",
+      "status": "Scheduled",
+      "pickup_address": "Fort Kochi, Ernakulam, Kerala",
+      "instructions": "Call before arriving, gate code #2345."
+    },
+    {
+      "id": 2,
+      "pickup_id": "PU2002",
+      "order_id": "ORD1002",
+      "customer_name": "Priya Nair",
+      "phone": "+91 9847012345",
+      "pickup_date": "18 Jul 2026",
+      "pickup_time": "2:00 PM - 4:00 PM",
+      "status": "Picked Up",
+      "pickup_address": "Beach Road, Kozhikode, Kerala",
+      "instructions": "Leave bag with security if not home."
+    },
+    {
+      "id": 3,
+      "pickup_id": "PU2003",
+      "order_id": "ORD1005",
+      "customer_name": "Anoop Krishnan",
+      "phone": "+91 9384756120",
+      "pickup_date": "18 Jul 2026",
+      "pickup_time": "9:00 AM - 11:00 AM",
+      "status": "Picked Up",
+      "pickup_address": "Palayam, Thiruvananthapuram, Kerala",
+      "instructions": ""
+    },
+    {
+      "id": 4,
+      "pickup_id": "PU2004",
+      "order_id": "ORD1001",
+      "customer_name": "Rahul Sharma",
+      "phone": "+91 9876543210",
+      "pickup_date": "18 Jul 2026",
+      "pickup_time": "11:00 AM - 1:00 PM",
+      "status": "Scheduled",
+      "pickup_address": "MG Road, Malappuram, Kerala",
+      "instructions": "Ring the bell twice."
+    },
+    {
+      "id": 5,
+      "pickup_id": "PU2005",
+      "order_id": "ORD1004",
+      "customer_name": "Vishnu Kumar",
+      "phone": "+91 9895112233",
+      "pickup_date": "17 Jul 2026",
+      "pickup_time": "4:00 PM - 6:00 PM",
+      "status": "Cancelled",
+      "pickup_address": "Pattom, Thiruvananthapuram, Kerala",
+      "instructions": "Customer rescheduled via phone call."
+    },
+    {
+      "id": 6,
+      "pickup_id": "PU2006",
+      "order_id": "ORD1003",
+      "customer_name": "Arjun Menon",
+      "phone": "+91 9633021456",
+      "pickup_date": "16 Jul 2026",
+      "pickup_time": "10:00 AM - 12:00 PM",
+      "status": "Picked Up",
+      "pickup_address": "Civil Station Road, Kannur, Kerala",
+      "instructions": ""
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 1,
+      "delivery_id": "DL3001",
+      "order_id": "ORD1003",
+      "customer_name": "Arjun Menon",
+      "phone": "+91 9633021456",
+      "delivery_date": "19 Jul 2026",
+      "delivery_time": "5:00 PM - 7:00 PM",
+      "status": "Out for Delivery",
+      "delivery_address": "Civil Station Road, Kannur, Kerala",
+      "instructions": "Deliver to front desk."
+    },
+    {
+      "id": 2,
+      "delivery_id": "DL3002",
+      "order_id": "ORD1004",
+      "customer_name": "Vishnu Kumar",
+      "phone": "+91 9895112233",
+      "delivery_date": "19 Jul 2026",
+      "delivery_time": "3:00 PM - 5:00 PM",
+      "status": "Pending",
+      "delivery_address": "Pattom, Thiruvananthapuram, Kerala",
+      "instructions": ""
+    },
+    {
+      "id": 3,
+      "delivery_id": "DL3003",
+      "order_id": "ORD1006",
+      "customer_name": "Rahul Sharma",
+      "phone": "+91 9876543210",
+      "delivery_date": "02 Jul 2026",
+      "delivery_time": "5:00 PM - 6:00 PM",
+      "status": "Delivered",
+      "delivery_address": "MG Road, Malappuram, Kerala",
+      "instructions": ""
+    },
+    {
+      "id": 4,
+      "delivery_id": "DL3004",
+      "order_id": "ORD1007",
+      "customer_name": "Priya Nair",
+      "phone": "+91 9847012345",
+      "delivery_date": "28 Jun 2026",
+      "delivery_time": "4:00 PM - 5:00 PM",
+      "status": "Delivered",
+      "delivery_address": "Beach Road, Kozhikode, Kerala",
+      "instructions": "Left at reception."
+    },
+    {
+      "id": 5,
+      "delivery_id": "DL3005",
+      "order_id": "ORD1008",
+      "customer_name": "Sneha Pillai",
+      "phone": "+91 9744556677",
+      "delivery_date": "15 Jun 2026",
+      "delivery_time": "2:00 PM - 3:00 PM",
+      "status": "Delivered",
+      "delivery_address": "Vytilla, Kochi, Kerala",
+      "instructions": ""
+    },
+    {
+      "id": 6,
+      "delivery_id": "DL3006",
+      "order_id": "ORD1010",
+      "customer_name": "Meera Thomas",
+      "phone": "+91 9020304050",
+      "delivery_date": "10 Jul 2026",
+      "delivery_time": "6:00 PM - 7:00 PM",
+      "status": "Delivered",
+      "delivery_address": "MG Road, Kottayam, Kerala",
+      "instructions": "Fragile saree, handle with care."
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "paymentId": "PAY1001",
+      "orderId": "ORD1001",
+      "customer": "Rahul Sharma",
+      "amount": 538,
+      "method": "UPI",
+      "status": "Paid",
+      "date": "17 Jul 2026",
+      "transactionId": "TXN90012345",
+      "notes": "Paid via Google Pay."
+    },
+    {
+      "id": 2,
+      "paymentId": "PAY1002",
+      "orderId": "ORD1002",
+      "customer": "Priya Nair",
+      "amount": 310,
+      "method": "Cash",
+      "status": "Pending",
+      "date": "18 Jul 2026",
+      "transactionId": "--",
+      "notes": "To be collected on delivery."
+    },
+    {
+      "id": 3,
+      "paymentId": "PAY1003",
+      "orderId": "ORD1003",
+      "customer": "Arjun Menon",
+      "amount": 890,
+      "method": "Card",
+      "status": "Paid",
+      "date": "16 Jul 2026",
+      "transactionId": "TXN90012398",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "paymentId": "PAY1004",
+      "orderId": "ORD1004",
+      "customer": "Vishnu Kumar",
+      "amount": 250,
+      "method": "UPI",
+      "status": "Paid",
+      "date": "17 Jul 2026",
+      "transactionId": "TXN90012410",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "paymentId": "PAY1005",
+      "orderId": "ORD1005",
+      "customer": "Anoop Krishnan",
+      "amount": 740,
+      "method": "Net Banking",
+      "status": "Paid",
+      "date": "18 Jul 2026",
+      "transactionId": "TXN90012455",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "paymentId": "PAY1006",
+      "orderId": "ORD1006",
+      "customer": "Rahul Sharma",
+      "amount": 620,
+      "method": "UPI",
+      "status": "Paid",
+      "date": "01 Jul 2026",
+      "transactionId": "TXN90011980",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "paymentId": "PAY1007",
+      "orderId": "ORD1007",
+      "customer": "Priya Nair",
+      "amount": 275,
+      "method": "Cash",
+      "status": "Paid",
+      "date": "27 Jun 2026",
+      "transactionId": "--",
+      "notes": "Collected in person."
+    },
+    {
+      "id": 8,
+      "paymentId": "PAY1008",
+      "orderId": "ORD1008",
+      "customer": "Sneha Pillai",
+      "amount": 180,
+      "method": "UPI",
+      "status": "Paid",
+      "date": "14 Jun 2026",
+      "transactionId": "TXN90011420",
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "paymentId": "PAY1009",
+      "orderId": "ORD1009",
+      "customer": "Divya Raj",
+      "amount": 520,
+      "method": "UPI",
+      "status": "Failed",
+      "date": "20 Jul 2026",
+      "transactionId": "TXN90012500",
+      "notes": "Payment gateway timeout, customer to retry."
+    },
+    {
+      "id": 10,
+      "paymentId": "PAY1010",
+      "orderId": "ORD1010",
+      "customer": "Meera Thomas",
+      "amount": 460,
+      "method": "Card",
+      "status": "Refunded",
+      "date": "09 Jul 2026",
+      "transactionId": "TXN90012120",
+      "notes": "Refunded ₹120 for a damaged item."
+    }
+  ],
+  "servicePerformance": [
+    {
+      "id": 1,
+      "service": "Wash & Fold",
+      "orders": 156,
+      "revenue": 42800
+    },
+    {
+      "id": 2,
+      "service": "Dry Cleaning",
+      "orders": 98,
+      "revenue": 61200
+    },
+    {
+      "id": 3,
+      "service": "Ironing",
+      "orders": 210,
+      "revenue": 25400
+    },
+    {
+      "id": 4,
+      "service": "Steam Press",
+      "orders": 87,
+      "revenue": 18300
+    },
+    {
+      "id": 5,
+      "service": "Premium Wash",
+      "orders": 34,
+      "revenue": 29750
+    },
+    {
+      "id": 6,
+      "service": "Shoe Cleaning",
+      "orders": 45,
+      "revenue": 11200
+    },
+    {
+      "id": 7,
+      "service": "Carpet Cleaning",
+      "orders": 12,
+      "revenue": 8600
+    },
+    {
+      "id": 8,
+      "service": "Curtain Cleaning",
+      "orders": 19,
+      "revenue": 9400
+    }
+  ],
+  
+  "weeklyRevenue": [
+    { "day": "Sun", "revenue": 12000 },
+    { "day": "Mon", "revenue": 18000 },
+    { "day": "Tue", "revenue": 14500 },
+    { "day": "Wed", "revenue": 22000 },
+    { "day": "Thu", "revenue": 19500 },
+    { "day": "Fri", "revenue": 28000 },
+    { "day": "Sat", "revenue": 34000 }
+  ],
+  "totalRevenue": 148000
+
+}
