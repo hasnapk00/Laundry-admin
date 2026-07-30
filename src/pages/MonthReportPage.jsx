@@ -33,18 +33,18 @@ const MonthReportPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-2.5 min-w-0">
           <button
             type="button"
             onClick={() => navigate("/reports")}
-            className="flex items-center gap-1.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+            className="flex shrink-0 items-center gap-1.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] px-2.5 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
           >
-            <ArrowLeft size={15} />
-            All Months
+            <ArrowLeft size={14} />
+            <span className="hidden sm:inline">All Months</span>
           </button>
-          <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h1 className="truncate text-base font-semibold text-gray-900 dark:text-white sm:text-lg">
             {label} — Full Report
           </h1>
         </div>
@@ -53,9 +53,9 @@ const MonthReportPage = () => {
           onClick={exportMonthCsv}
           disabled={!loading && monthOrders.length === 0}
           title={monthOrders.length === 0 ? "No orders this month" : undefined}
-          className="flex items-center justify-center gap-2 rounded-xl bg-[#231F20] dark:bg-[#E8A843] px-4 py-2.5 text-sm font-medium text-white dark:text-[#231F20] shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:opacity-40"
+          className="flex items-center justify-center gap-2 rounded-lg bg-[#231F20] dark:bg-[#E8A843] px-3.5 py-2 text-sm font-medium text-white dark:text-[#231F20] shadow-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:opacity-40"
         >
-          <Download size={16} />
+          <Download size={15} />
           Export {label} CSV
         </button>
       </div>
@@ -69,7 +69,7 @@ const MonthReportPage = () => {
         loading={loading}
       />
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <ServiceReportTable orders={monthOrders} loading={loading} />
         <PaymentReport payments={monthPayments} loading={loading} />
       </div>
@@ -86,33 +86,34 @@ const MonthOrdersTable = ({ orders, loading }) => {
 
   if (loading) {
     return (
-      <div className="h-64 animate-pulse rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-zinc-800" />
+      <div className="h-56 animate-pulse rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-zinc-800" />
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] shadow-sm">
-      <div className="border-b border-gray-100 dark:border-gray-800 px-5 py-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">All Orders</h2>
+    <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] shadow-sm">
+      <div className="border-b border-gray-100 dark:border-gray-800 px-4 py-3">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white">All Orders</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400">
           Every order placed this month, {orders.length} total.
         </p>
       </div>
 
       {orders.length === 0 ? (
-        <div className="px-5 py-12 text-center text-gray-500 dark:text-gray-400">
+        <div className="px-4 py-10 text-center text-sm text-gray-500 dark:text-gray-400">
           No orders this month.
         </div>
       ) : (
         <>
-          <div className="overflow-x-auto">
+          {/* Table (tablet + desktop) */}
+          <div className="hidden overflow-x-auto md:block">
             <table className="min-w-full">
               <thead className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
                 <tr>
                   {["Order ID", "Customer", "Service", "Date", "Status", "Amount"].map((h) => (
                     <th
                       key={h}
-                      className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+                      className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
                     >
                       {h}
                     </th>
@@ -125,28 +126,67 @@ const MonthOrdersTable = ({ orders, loading }) => {
                     key={o.id}
                     className="border-t border-gray-100 dark:border-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-800/30"
                   >
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                    <td className="max-w-[110px] truncate px-3 py-2.5 text-sm font-medium text-gray-900 dark:text-white">
                       {o.id}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="max-w-[140px] truncate px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300">
                       {o.customer}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="max-w-[140px] truncate px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300">
                       {o.service}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="whitespace-nowrap px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300">
                       {o.orderDate}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="whitespace-nowrap px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300">
                       {o.status}
                     </td>
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                    <td className="whitespace-nowrap px-3 py-2.5 text-sm font-medium text-gray-900 dark:text-white">
                       ₹{Number(o.total).toLocaleString()}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Cards */}
+          <div className="space-y-2.5 p-3 md:hidden">
+            {pagination.paginatedData.map((o) => (
+              <div
+                key={o.id}
+                className="rounded-lg border border-gray-200 dark:border-gray-800 p-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                      {o.customer}
+                    </p>
+                    <p className="truncate text-xs text-gray-500 dark:text-gray-400">{o.id}</p>
+                  </div>
+                  <p className="shrink-0 text-sm font-medium text-gray-900 dark:text-white">
+                    ₹{Number(o.total).toLocaleString()}
+                  </p>
+                </div>
+
+                <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <p className="text-gray-500 dark:text-gray-400">Service</p>
+                    <p className="truncate font-medium text-gray-700 dark:text-gray-300">
+                      {o.service}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500 dark:text-gray-400">Date</p>
+                    <p className="font-medium text-gray-700 dark:text-gray-300">{o.orderDate}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-gray-500 dark:text-gray-400">Status</p>
+                    <p className="font-medium text-gray-700 dark:text-gray-300">{o.status}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <Pagination

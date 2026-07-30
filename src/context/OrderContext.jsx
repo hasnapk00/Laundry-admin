@@ -1,53 +1,93 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import mockData from "../mock-data.json"
-
+import {
+  getOrders,
+  getOrderById as getOrderApi,
+  updateOrderStatusApi,
+  getDashboardOrders
+} from "../api/orderApi";
 const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [dashboardOrders, setDashboardOrders] = useState([]);
 
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      // TODO: Replace with backend API call (e.g. axios.get("/api/orders"))
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      setOrders(mockData.orders);
-    } catch (error) {
-      console.error("Failed to fetch orders:", error);
-    } finally {
-      setLoading(false);
+const fetchOrders = async () => {
+  setLoading(true);
+
+  try {
+    const res = await getOrders();
+
+    console.log(res.data);
+
+   if (res.data.success) {
+  setOrders(res.data.data);
+} else {
+  setOrders([]);
+}
+  } catch (err) {
+    console.error(err);
+    setOrders([]);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+const fetchDashboardOrders = async () => {
+  try {
+    const res = await getDashboardOrders();
+
+    if (res.data.success) {
+      setDashboardOrders(res.data.data);
+    } else {
+      setDashboardOrders([]);
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setDashboardOrders([]);
+  }
+};
 
-  useEffect(() => {
-    fetchOrders();   // ← load once when the app/provider mounts
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem("accessToken");
 
-  const getOrderById = (id) => {
-    return orders.find((order) => order.id === id) || null;
-  };
+  if (token) {
+    fetchOrders();
+    fetchDashboardOrders();
+  }
+}, []);
+
+const getOrderById = async (id) => {
+  try {
+    const res = await getOrderApi(id);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
 
 
 
-  const updateOrderStatus = async (id, status) => {
-    setLoading(true);
-    try {
-      // TODO: Replace with backend API call (e.g. axios.patch(`/api/orders/${id}`, { status }))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setOrders((prev) =>
-        prev.map((order) =>
-          order.id === id ? { ...order, status } : order
-        )
-      );
-      return true;
-    } catch (error) {
-      console.error("Failed to update order status:", error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+ const updateOrderStatus = async (id, status) => {
+  setLoading(true);
+
+  try {
+    await updateOrderStatusApi(id, status);
+
+    await fetchOrders();
+
+    await fetchDashboardOrders();
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  } finally {
+    setLoading(false);
+  }
+};
 
   const getOrderTracking = (id) => {
     const order = getOrderById(id);
@@ -65,15 +105,17 @@ export const OrderProvider = ({ children }) => {
 
   return (
     <OrderContext.Provider
-      value={{
-        orders,
-        loading,
-        fetchOrders,
-        getOrderById,
-        updateOrderStatus,
-        getOrderTracking,
-      }}
-    >
+  value={{
+    orders,
+    dashboardOrders,
+    loading,
+    fetchOrders,
+    fetchDashboardOrders,
+    getOrderById,
+    updateOrderStatus,
+    getOrderTracking,
+  }}
+>
       {children}
     </OrderContext.Provider>
   );

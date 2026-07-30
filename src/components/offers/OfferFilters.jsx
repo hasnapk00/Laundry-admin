@@ -9,8 +9,8 @@ const OfferFilters = ({
   setTypeFilter,
 }) => {
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm">
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+    <div className="rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 sm:p-4 shadow-sm">
+      <div className="flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center">
 
         {/* Search */}
         <div className="relative flex-1">
@@ -23,16 +23,16 @@ const OfferFilters = ({
             placeholder="Search offers..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-2 pl-9 pr-3 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-550"
+            className="w-full rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 sm:py-2 pl-9 pr-3 text-xs sm:text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-550"
           />
         </div>
 
         {/* Status */}
-        <div className="relative w-full sm:w-52">
+        <div className="relative w-full sm:w-48 md:w-52">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full appearance-none rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-2 pr-10 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+            className="w-full appearance-none rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-3 sm:px-4 py-1.5 sm:py-2 pr-9 sm:pr-10 text-xs sm:text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
           >
             <option value="All">All Status</option>
             <option value="Active">Active</option>
@@ -41,16 +41,16 @@ const OfferFilters = ({
           </select>
           <ChevronDown
             size={14}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
+            className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
           />
         </div>
 
         {/* Type */}
-        <div className="relative w-full sm:w-52">
+        <div className="relative w-full sm:w-48 md:w-52">
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="w-full appearance-none rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-2 pr-10 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+            className="w-full appearance-none rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-3 sm:px-4 py-1.5 sm:py-2 pr-9 sm:pr-10 text-xs sm:text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
           >
             <option value="All">All Types</option>
             <option value="Flat">Flat Amount</option>
@@ -58,7 +58,7 @@ const OfferFilters = ({
           </select>
           <ChevronDown
             size={14}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
+            className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
           />
         </div>
       </div>

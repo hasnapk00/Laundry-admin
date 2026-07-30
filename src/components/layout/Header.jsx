@@ -2,10 +2,8 @@ import {
   Bell,
   Menu,
   Moon,
-  Search,
   Sun,
   UserCircle,
-  ChevronDown,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext";
@@ -58,7 +56,7 @@ export default function Header({ setIsSidebarOpen }) {
   };
 
   return (
-    <header className="h-16 md:h-16 bg-white dark:bg-[#1a1a1a] border-b border-gray-100 dark:border-gray-800/80 px-4 md:px-6 flex items-center justify-between transition-colors duration-200">
+    <header className="h-14 md:h-14 bg-white dark:bg-[#1a1a1a] border-b border-gray-100 dark:border-gray-800/80 px-4 md:px-6 flex items-center justify-between transition-colors duration-200">
       {/* Left */}
 
       <div className="flex items-center gap-3">
@@ -74,13 +72,9 @@ export default function Header({ setIsSidebarOpen }) {
 
         <div>
 
-          <h1 className="text-base md:text-lg font-bold leading-tight">
+          <h1 className="text-sm md:text-lg font-bold leading-tight">
             {greeting} 👋
           </h1>
-
-          <p className="hidden sm:block text-[11px] text-gray-500">
-            Welcome back to Cleaneo
-          </p>
 
         </div>
 

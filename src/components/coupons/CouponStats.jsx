@@ -3,7 +3,6 @@ import {
   CheckCircle2,
   Clock3,
   XCircle,
-  TrendingUp,
 } from "lucide-react";
 
 const CouponStats = ({ stats }) => {
@@ -36,41 +35,31 @@ const CouponStats = ({ stats }) => {
       bg: "bg-red-100 dark:bg-red-950/20",
       color: "text-red-600 dark:text-red-400",
     },
-    {
-      title: "Total Redemptions",
-      value: stats.redeemed,
-      icon: TrendingUp,
-      bg: "bg-purple-100 dark:bg-purple-950/20",
-      color: "text-purple-600 dark:text-purple-400",
-    },
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
       {cards.map((card) => {
         const Icon = card.icon;
 
         return (
           <div
             key={card.title}
-            className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm transition-all hover:shadow-md dark:hover:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-700"
+            className="rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 shadow-sm transition-all duration-200 hover:shadow-md dark:hover:shadow-gray-900/50"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                   {card.title}
                 </p>
 
-                <h2 className="mt-2 text-3xl font-bold text-[#231F20] dark:text-white">
+                <h2 className="mt-1 text-lg sm:text-xl font-bold text-[#231F20] dark:text-white">
                   {card.value}
                 </h2>
               </div>
 
-              <div className={`rounded-xl p-3 ${card.bg}`}>
-                <Icon
-                  size={24}
-                  className={card.color}
-                />
+              <div className={`flex-shrink-0 rounded-md p-1.5 ${card.bg}`}>
+                <Icon size={16} className={card.color} />
               </div>
             </div>
           </div>

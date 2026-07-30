@@ -79,21 +79,21 @@ const PackageModal = ({ isOpen, data, onClose }) => {
     Number(formData.packagePrice || 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4">
-      <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white dark:bg-[#1a1a1a] shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center backdrop-blur-sm sm:p-4">
+      <div className="max-h-[92vh] sm:max-h-[90vh] w-full max-w-lg sm:max-w-2xl md:max-w-3xl overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-[#1a1a1a] shadow-xl">
 
         {/* Header */}
 
-        <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-6 py-5">
-          <h2 className="text-xl font-semibold text-[#231F20] dark:text-white">
+        <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-4 py-3 sm:px-5 sm:py-4">
+          <h2 className="text-base sm:text-lg font-semibold text-[#231F20] dark:text-white">
             {data ? "Edit Package" : "Add Package"}
           </h2>
 
           <button
             onClick={onClose}
-            className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="rounded-lg p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            <X size={20} className="text-gray-500 dark:text-gray-400" />
+            <X size={18} className="text-gray-500 dark:text-gray-400" />
           </button>
         </div>
 
@@ -101,9 +101,9 @@ const PackageModal = ({ isOpen, data, onClose }) => {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 p-6"
+          className="space-y-4 p-4 sm:space-y-5 sm:p-5"
         >
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
 
             <Input
               label="Package Name"
@@ -144,8 +144,8 @@ const PackageModal = ({ isOpen, data, onClose }) => {
 
           {formData.originalPrice &&
             formData.packagePrice && (
-              <div className="rounded-xl bg-green-50 dark:bg-green-500/10 p-4">
-                <p className="font-medium text-green-700 dark:text-green-400">
+              <div className="rounded-lg bg-green-50 dark:bg-green-500/10 p-3">
+                <p className="text-sm font-medium text-green-700 dark:text-green-400">
                   Customer Saves ₹{savings}
                 </p>
               </div>
@@ -154,17 +154,17 @@ const PackageModal = ({ isOpen, data, onClose }) => {
           {/* Services */}
 
           <div>
-            <label className="mb-3 block font-medium text-gray-900 dark:text-white">
+            <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
               Included Services
             </label>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {SERVICES.map((service) => (
                 <button
                   key={service}
                   type="button"
                   onClick={() => toggleService(service)}
-                  className={`rounded-full border px-4 py-2 text-sm transition ${
+                  className={`rounded-full border px-3 py-1.5 text-xs sm:text-sm transition ${
                     formData.services.includes(service)
                       ? "border-[#231F20] dark:border-[#E8A843] bg-[#231F20] dark:bg-[#E8A843] text-white"
                       : "border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -179,34 +179,34 @@ const PackageModal = ({ isOpen, data, onClose }) => {
           {/* Description */}
 
           <div>
-            <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+            <label className="mb-1.5 block text-sm font-medium text-gray-900 dark:text-white">
               Description
             </label>
 
             <textarea
-              rows={4}
+              rows={3}
               name="description"
               value={formData.description}
               onChange={handleChange}
               placeholder="Enter package description..."
-              className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-2.5 text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
             />
           </div>
 
           {/* Footer */}
 
-          <div className="flex flex-col-reverse gap-3 border-t border-gray-200 dark:border-gray-800 pt-6 sm:flex-row sm:justify-end">
+          <div className="flex flex-col-reverse gap-2 border-t border-gray-200 dark:border-gray-800 pt-4 sm:flex-row sm:justify-end sm:gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-gray-300 dark:border-gray-700 px-6 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-[#231F20] dark:bg-[#E8A843] px-6 py-3 text-white hover:opacity-90"
+              className="rounded-lg bg-[#231F20] dark:bg-[#E8A843] px-4 py-2 text-sm text-white hover:opacity-90"
             >
               {data ? "Update Package" : "Save Package"}
             </button>
@@ -225,14 +225,14 @@ const Input = ({
   ...props
 }) => (
   <div>
-    <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+    <label className="mb-1.5 block text-sm font-medium text-gray-900 dark:text-white">
       {label}
     </label>
 
     <input
       type={type}
       {...props}
-      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-2.5 text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
     />
   </div>
 );
@@ -243,13 +243,13 @@ const Select = ({
   ...props
 }) => (
   <div>
-    <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+    <label className="mb-1.5 block text-sm font-medium text-gray-900 dark:text-white">
       {label}
     </label>
 
     <select
       {...props}
-      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white outline-none focus:border-[#E8A843] cursor-pointer"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-2.5 text-sm text-gray-900 dark:text-white outline-none focus:border-[#E8A843] cursor-pointer"
     >
       {options.map((option) => (
         <option

@@ -15,13 +15,13 @@ const IN_PROGRESS_STATUSES = [
   "Out for Delivery",
 ];
 
-const OrdersStats = ({ orders = [] }) => {
-  const total = orders.length;
-  const pending = orders.filter((o) => o.status === "Pending").length;
-  const inProgress = orders.filter((o) =>
+const OrdersStats = ({ dashboardOrders = [] }) => {
+  const total = dashboardOrders.length;
+  const pending = dashboardOrders.filter((o) => o.status === "Pending").length;
+  const inProgress = dashboardOrders.filter((o) =>
     IN_PROGRESS_STATUSES.includes(o.status)
   ).length;
-  const delivered = orders.filter((o) => o.status === "Delivered").length;
+  const delivered = dashboardOrders.filter((o) => o.status === "Delivered").length;
 
   const cards = [
     {
@@ -55,28 +55,28 @@ const OrdersStats = ({ orders = [] }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
       {cards.map((card) => {
         const Icon = card.icon;
 
         return (
           <div
             key={card.title}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-700"
+            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 sm:p-4 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-700 min-w-0"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase truncate">
                   {card.title}
                 </p>
 
-                <h2 className="mt-1 text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="mt-1 text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white truncate">
                   {card.value}
                 </h2>
               </div>
 
-              <div className={`rounded-xl p-2.5 ${card.bg}`}>
-                <Icon className={card.color} size={18} />
+              <div className={`rounded-lg sm:rounded-xl p-2 sm:p-2.5 shrink-0 ${card.bg}`}>
+                <Icon className={card.color} size={16} />
               </div>
             </div>
           </div>

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreditCard, SquarePen } from "lucide-react";
 import { usePayments } from "../../context/PaymentContext";
-import { useOrders } from "../../context/OrderContext";
 import PaymentStatusPanel from "./PaymentStatusPanel";
 import { SkeletonRows } from "../TableSkeleton";
+import Pagination from "../Pagination";
+import { usePagination } from "../../hooks/usePagination";
 
 const STATUS_STYLES = {
   Paid: "bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400",
@@ -14,7 +15,6 @@ const STATUS_STYLES = {
 
 const PaymentsTable = ({ onView, search = "", status = "All", method = "All" }) => {
   const { payments, updatePaymentStatus, loading } = usePayments();
-  const { getOrderById } = useOrders();
   const [editingPayment, setEditingPayment] = useState(null);
 
   const handleStatusChange = (paymentId, newStatus) => {
@@ -23,48 +23,67 @@ const PaymentsTable = ({ onView, search = "", status = "All", method = "All" }) 
 
   // Filter payments based on search, status, and method
   const filteredPayments = payments.filter((payment) => {
-    const matchesSearch = 
-      payment.paymentId?.toLowerCase().includes(search.toLowerCase()) ||
-      payment.orderId?.toLowerCase().includes(search.toLowerCase()) ||
-      payment.customer?.toLowerCase().includes(search.toLowerCase());
+  const matchesSearch =
+  String(payment.paymentId ?? "")
+    .toLowerCase()
+    .includes(search.toLowerCase()) ||
+  String(payment.orderId ?? "")
+    .toLowerCase()
+    .includes(search.toLowerCase()) ||
+  payment.customerName
+    ?.toLowerCase()
+    .includes(search.toLowerCase());
     
-    const matchesStatus = status === "All" || payment.status === status;
-    const matchesMethod = method === "All" || payment.method === method;
+    const matchesStatus = status === "All" || payment.paymentStatus === status;
+    const matchesMethod = method === "All" || payment.paymentMethod === method;
     
     return matchesSearch && matchesStatus && matchesMethod;
   });
 
+  // Pagination
+  const {
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    paginatedData: paginatedPayments,
+  } = usePagination(filteredPayments, 5);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, status, method, setCurrentPage]);
+
   return (
     <div className="overflow-visible">
-      <div className="overflow-x-auto overflow-y-visible">
-        <table className="w-full min-w-[1300px]">
+      <div className="overflow-x-auto overflow-y-visible -mx-3 px-3 sm:mx-0 sm:px-0">
+        <table className="w-full min-w-[1000px]">
           <thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
             <tr>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Payment ID
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Order ID
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Customer
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Amount
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Discount
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Tax
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Method
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Status
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Date
               </th>
             </tr>
@@ -75,15 +94,15 @@ const PaymentsTable = ({ onView, search = "", status = "All", method = "All" }) 
               <SkeletonRows rows={5} columns={9} />
             ) : filteredPayments.length === 0 ? (
               <tr>
-                <td colSpan={9} className="py-16 text-center">
+                <td colSpan={9} className="py-12 text-center">
                   <div className="flex flex-col items-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                      <CreditCard size={28} className="text-gray-400 dark:text-gray-500" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                      <CreditCard size={22} className="text-gray-400 dark:text-gray-500" />
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-gray-700 dark:text-gray-300">
+                    <h3 className="mt-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                       No Payments Found
                     </h3>
-                    <p className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                       {search || status !== "All" || method !== "All"
                         ? "Try adjusting your search or filters"
                         : "Payment records will appear here once available"}
@@ -92,74 +111,71 @@ const PaymentsTable = ({ onView, search = "", status = "All", method = "All" }) 
                 </td>
               </tr>
             ) : (
-              filteredPayments.map((payment) => {
-                const order = getOrderById(payment.orderId);
-                const discount = order?.discount ?? 0;
-                const tax = order?.tax ?? 0;
-
+              paginatedPayments.map((payment) => {
+               
                 return (
                   <tr
-                    key={payment.id}
+                    key={payment.paymentId || payment.orderId}
                     className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
                   >
-                    <td className="px-4 py-2.5 text-sm font-medium text-gray-900 dark:text-white">
-                      {payment.paymentId}
+                    <td className="px-3 py-2 text-xs font-medium text-gray-900 dark:text-white">
+                      {payment.paymentId || "-"}
                     </td>
-                    <td className="px-4 py-2.5 text-sm text-gray-600 dark:text-gray-400">
-                      {payment.orderId}
+                    <td className="px-3 py-2 text-xs text-gray-600 dark:text-gray-400">
+                    {payment.orderId}
                     </td>
-                    <td className="px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300">
-                      {payment.customer}
+                    <td className="px-3 py-2 text-xs text-gray-700 dark:text-gray-300">
+                      {payment.customerName}
                     </td>
-                    <td className="px-4 py-2.5">
-                      <span className="font-semibold text-sm text-[#E8A843]">
-                        ₹{payment.amount}
+                    <td className="px-3 py-2">
+                      <span className="font-semibold text-xs text-[#E8A843]">
+                        ₹{payment.totalAmount}
                       </span>
                     </td>
-                    <td className="px-4 py-2.5 text-sm">
-                      {discount > 0 ? (
-                        <span className="text-red-500 dark:text-red-400">
-                          -₹{discount}
-                        </span>
-                      ) : (
-                        <span className="text-gray-400 dark:text-gray-500">—</span>
-                      )}
-                    </td>
-                    <td className="px-4 py-2.5 text-sm">
-                      {tax > 0 ? (
+                    <td className="px-3 py-2 text-xs">
+  {payment.discountAmount > 0 ? (
+    <span className="text-red-500 dark:text-red-400">
+      -₹{payment.discountAmount}
+    </span>
+  ) : (
+    <span className="text-gray-400 dark:text-gray-500">—</span>
+  )}
+</td>
+                    <td className="px-3 py-2 text-xs">
+                      {payment.taxAmount > 0 ? (
                         <span className="text-gray-600 dark:text-gray-400">
-                          +₹{tax}
+                          +₹{payment.taxAmount}
                         </span>
                       ) : (
                         <span className="text-gray-400 dark:text-gray-500">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-2.5">
-                      <span className="inline-flex rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:text-gray-400">
-                        {payment.method}
+                    <td className="px-3 py-2">
+                      <span className="inline-flex rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-[11px] font-medium text-gray-600 dark:text-gray-400">
+                        {payment.paymentMethod}
                       </span>
                     </td>
-                    <td className="px-4 py-2.5">
-                      <div className="flex items-center gap-2">
+                    <td className="px-3 py-2">
+                      <div className="flex items-center gap-1.5">
                         <span
-                          className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                            STATUS_STYLES[payment.status] ||
+                          className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                            STATUS_STYLES[payment.paymentStatus]||
                             "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
                           }`}
                         >
-                          {payment.status}
+                          {payment.paymentStatus}
                         </span>
                         <button
                           onClick={() => setEditingPayment(payment)}
                           title="Update status"
                           className="rounded-lg p-1 text-gray-400 hover:bg-[#E8A843]/10 hover:text-[#E8A843] transition-colors"
                         >
-                          <SquarePen size={14} />
+                          <SquarePen size={13} />
                         </button>
                       </div>
                     </td>
-                    <td className="px-4 py-2.5 text-sm text-gray-550 dark:text-gray-400">
-                      {payment.date}
+                    <td className="px-3 py-2 text-xs text-gray-550 dark:text-gray-400">
+                      {new Date(payment.orderDate).toLocaleDateString("en-IN")}
                     </td>
                   </tr>
                 );
@@ -169,13 +185,28 @@ const PaymentsTable = ({ onView, search = "", status = "All", method = "All" }) 
         </table>
       </div>
 
+      {!loading && filteredPayments.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          totalItems={filteredPayments.length}
+          pageSize={5}
+          label="payments"
+        />
+      )}
+
       <PaymentStatusPanel
         isOpen={!!editingPayment}
         payment={editingPayment}
         onClose={() => setEditingPayment(null)}
-        onSave={(newStatus) =>
-          editingPayment && handleStatusChange(editingPayment.id, newStatus)
-        }
+   onSave={(newStatus) =>
+  editingPayment &&
+  handleStatusChange(
+    editingPayment.paymentId || editingPayment.orderId,
+    newStatus
+  )
+}
       />
     </div>
   );

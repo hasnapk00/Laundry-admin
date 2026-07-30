@@ -30,7 +30,7 @@ const Reports = () => {
   } = useReports();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-5">
       <ReportsHeader
         periodLabel={periodLabel}
         period={period}
@@ -51,14 +51,14 @@ const Reports = () => {
         loading={loading}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
         {/* Revenue Trend Chart - Compact */}
-        <div className="lg:col-span-1">
+        <div className="md:col-span-2 xl:col-span-1">
           <RevenueeTrendChart data={weeklyRevenue} compact />
         </div>
 
         {/* Service Report Table - Compact */}
-        <div className="lg:col-span-1">
+        <div className="xl:col-span-1">
           <ServiceReportTable
             orders={filteredOrders}
             loading={loading}
@@ -67,7 +67,7 @@ const Reports = () => {
         </div>
 
         {/* Payment Report - Compact */}
-        <div className="lg:col-span-1">
+        <div className="xl:col-span-1">
           <PaymentReport
             payments={filteredPayments}
             loading={loading}

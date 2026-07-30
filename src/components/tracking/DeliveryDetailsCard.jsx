@@ -20,22 +20,22 @@ const DeliveryDetailsCard = ({ order }) => {
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] shadow-sm">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800 px-4 py-3">
+      <div className="border-b border-gray-200 dark:border-gray-800 px-3.5 sm:px-4 py-2 sm:py-3">
         <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
           Delivery Details
         </h2>
       </div>
 
       {/* Content */}
-      <div className="space-y-2.5 p-4">
+      <div className="space-y-2.5 p-3.5 sm:p-4">
         <InfoRow icon={MapPin} label="Pickup Address">
-          <p className="text-sm text-gray-700 dark:text-gray-300">
+          <p className="text-sm text-gray-700 dark:text-gray-300 break-words">
             {order.pickupAddress}
           </p>
         </InfoRow>
 
         <InfoRow icon={MapPin} label="Delivery Address">
-          <p className="text-sm text-gray-700 dark:text-gray-300">
+          <p className="text-sm text-gray-700 dark:text-gray-300 break-words">
             {order.deliveryAddress}
           </p>
         </InfoRow>
@@ -48,7 +48,7 @@ const DeliveryDetailsCard = ({ order }) => {
 
         <InfoRow icon={PackageCheck} label="Current Status">
           <span
-            className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+            className={`inline-flex max-w-full truncate rounded-full px-2.5 py-0.5 text-xs font-semibold ${
               statusStyles[order.status] || "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
             }`}
           >
@@ -57,7 +57,7 @@ const DeliveryDetailsCard = ({ order }) => {
         </InfoRow>
 
         <InfoRow icon={Package} label="Order ID">
-          <p className="text-sm font-medium text-gray-800 dark:text-white">
+          <p className="text-sm font-medium text-gray-800 dark:text-white truncate">
             #{order.id}
           </p>
         </InfoRow>
@@ -67,9 +67,9 @@ const DeliveryDetailsCard = ({ order }) => {
 };
 
 const InfoRow = ({ icon: Icon, label, children }) => (
-  <div className="flex items-start gap-3 border-b border-gray-100 dark:border-gray-800 pb-2.5 last:border-none last:pb-0">
-    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E8A843]/10 text-[#E8A843] flex-shrink-0">
-      <Icon size={15} />
+  <div className="flex items-start gap-2.5 sm:gap-3 border-b border-gray-100 dark:border-gray-800 pb-2.5 last:border-none last:pb-0">
+    <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#E8A843]/10 text-[#E8A843] flex-shrink-0">
+      <Icon size={14} className="sm:w-[15px] sm:h-[15px]" />
     </div>
 
     <div className="flex-1 min-w-0">

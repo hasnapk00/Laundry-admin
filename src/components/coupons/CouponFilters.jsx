@@ -11,13 +11,13 @@ const CouponFilters = ({
   setCustomerTypeFilter,
 }) => {
   return (
-    <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+    <div className="rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 sm:p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-2 sm:gap-3 lg:grid-cols-4">
         {/* Search */}
 
         <div className="relative">
           <Search
-            size={18}
+            size={16}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
           />
 
@@ -26,7 +26,7 @@ const CouponFilters = ({
             placeholder="Search coupon..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 py-2.5 pl-10 pr-4 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#231F20] dark:focus:border-[#E8A843]"
+            className="w-full rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 py-1.5 sm:py-2 pl-9 pr-3 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none transition-colors focus:border-[#231F20] dark:focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800"
           />
         </div>
 
@@ -35,7 +35,7 @@ const CouponFilters = ({
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-4 py-2.5 text-gray-900 dark:text-white outline-none focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
+          className="rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white outline-none transition-colors focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
         >
           <option value="All">All Status</option>
           <option value="Active">Active</option>
@@ -50,7 +50,7 @@ const CouponFilters = ({
           onChange={(e) =>
             setDiscountTypeFilter(e.target.value)
           }
-          className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-4 py-2.5 text-gray-900 dark:text-white outline-none focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
+          className="rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white outline-none transition-colors focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
         >
           <option value="All">All Discount Types</option>
           <option value="Flat">Flat</option>
@@ -64,7 +64,7 @@ const CouponFilters = ({
           onChange={(e) =>
             setCustomerTypeFilter(e.target.value)
           }
-          className="rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-4 py-2.5 text-gray-900 dark:text-white outline-none focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
+          className="rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white outline-none transition-colors focus:border-[#231F20] dark:focus:border-[#E8A843] cursor-pointer"
         >
           <option value="All">All Customers</option>
           <option value="New">New Customers</option>

@@ -1,59 +1,54 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
+import { loginApi, logoutApi } from "../api/authApi";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem("user");
-    return saved ? JSON.parse(saved) : null;
-  });
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const login = async (email, password) => {
+  const login = async (data) => {
     setLoading(true);
+
     try {
-      // TODO: Replace with backend API call (e.g. axios.post("/api/auth/login", { email, password }))
-      await new Promise((resolve) => setTimeout(resolve, 800)); // Simulate API delay
-      
-      const mockUser = { email, name: "Admin" };
-      setUser(mockUser);
-      localStorage.setItem("user", JSON.stringify(mockUser));
-      return true;
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
+      const res = await loginApi(data);
+
+      console.log(res.data); // Check the response
+
+      // Change these lines based on your API response
+      const token = res.data.data.token;
+
+      localStorage.setItem("accessToken", token);
+      setUser(res.data.data);
+
+      return {
+        success: true,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message:
+          err.response?.data?.message || "Invalid email or password",
+      };
     } finally {
       setLoading(false);
     }
   };
 
   const logout = async () => {
-    setLoading(true);
     try {
-      // TODO: Replace with backend API call (e.g. axios.post("/api/auth/logout"))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setUser(null);
-      localStorage.removeItem("user");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    } finally {
-      setLoading(false);
-    }
+      await logoutApi();
+    } catch (err) {}
+
+    localStorage.removeItem("accessToken");
+    setUser(null);
   };
 
-  const isAuthenticated = !!user;
-
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loading, login, logout }}>
+    <AuthContext.Provider value={{ login, logout, loading, user }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);

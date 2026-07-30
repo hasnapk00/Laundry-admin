@@ -22,16 +22,22 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await login(formData.email, formData.password);
-      navigate("/dashboard");
-    } catch (err) {
-      setError("Invalid credentials. Please try again.");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  setError("");
+
+  const res = await login({
+    email: formData.email,
+    password: formData.password,
+  });
+
+  if (res.success) {
+    navigate("/dashboard");
+  } else {
+    setError(res.message);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">

@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { useOffer } from "../../context/OfferContext";
 
 const OfferModal = ({ isOpen, data, onClose }) => {
+const {
+  addOffer,
+  updateOffer,
+} = useOffer();
+
+
   const [formData, setFormData] = useState({
-    name: "",
-    type: "Percentage",
-    discount: "",
-    minOrderAmount: "",
-    applicableServices: [],
-    startDate: "",
-    endDate: "",
-    status: "Active",
-    description: "",
-  });
+  offerCode: "",
+  offerName: "",
+  offerType: "Percentage",
+  applicableServices: [], 
+  discountValue: "",
+  minimumOrderAmount: "",
+  startDate: "",
+  endDate: "",
+  status: "Active",
+  offerDescription: "",
+});
 
   const services = [
     "Wash & Fold",
@@ -25,21 +33,34 @@ const OfferModal = ({ isOpen, data, onClose }) => {
 
   useEffect(() => {
     if (data) {
-      setFormData({
-        ...data,
-        applicableServices: data.applicableServices || [],
-      });
+     setFormData({
+  offerCode: data.offerCode || "",
+  offerName: data.offerName || "",
+  offerType: data.offerType || "Percentage",
+    applicableServices: data.applicableServices || [],
+  discountValue: data.discountValue || "",
+  minimumOrderAmount: data.minimumOrderAmount || "",
+  startDate: data.startDate
+    ? data.startDate.slice(0, 10)
+    : "",
+  endDate: data.endDate
+    ? data.endDate.slice(0, 10)
+    : "",
+  status: data.status || "Active",
+  offerDescription: data.offerDescription || "",
+});
     } else {
       setFormData({
-        name: "",
-        type: "Percentage",
-        discount: "",
-        minOrderAmount: "",
-        applicableServices: [],
-        startDate: "",
-        endDate: "",
-        status: "Active",
-        description: "",
+  offerCode: "",
+  offerName: "",
+  offerType: "Percentage",
+  discountValue: "",
+  applicableServices: [],
+  minimumOrderAmount: "",
+  startDate: "",
+  endDate: "",
+  status: "Active",
+  offerDescription: "",
       });
     }
   }, [data]);
@@ -64,31 +85,50 @@ const OfferModal = ({ isOpen, data, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    console.log(formData);
-
-    // Backend API
-    onClose();
+  const payload = {
+    ...formData,
+    discountValue: Number(formData.discountValue),
+    minimumOrderAmount: Number(formData.minimumOrderAmount),
+    startDate: new Date(formData.startDate).toISOString(),
+    endDate: new Date(formData.endDate).toISOString(),
+    applicableServices: data?.applicableServices || [],
   };
 
+  let success = false;
+
+  if (data) {
+    success = await updateOffer({
+      ...data,
+      ...payload,
+    });
+  } else {
+    success = await addOffer(payload);
+  }
+
+  if (success) {
+    onClose();
+  }
+};
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4">
-      <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white dark:bg-[#1a1a1a] shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-2 sm:p-4">
+      <div className="max-h-[95vh] w-full max-w-sm sm:max-w-lg lg:max-w-3xl overflow-y-auto rounded-lg sm:rounded-2xl bg-white dark:bg-[#1a1a1a] shadow-lg sm:shadow-xl">
 
         {/* Header */}
 
-        <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-6 py-4">
-          <h2 className="text-xl font-semibold text-[#231F20] dark:text-white">
+        <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-3 sm:px-4 py-3">
+          <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-[#231F20] dark:text-white truncate">
             {data ? "Edit Offer" : "Add Offer"}
           </h2>
 
           <button
             onClick={onClose}
-            className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex-shrink-0 rounded-lg p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            <X size={20} className="text-gray-500 dark:text-gray-400" />
+            <X size={18} className="text-gray-500 dark:text-gray-400" />
           </button>
         </div>
 
@@ -96,36 +136,43 @@ const OfferModal = ({ isOpen, data, onClose }) => {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 p-6"
+          className="space-y-3 sm:space-y-4 p-3 sm:p-4"
         >
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
+
+<Input
+  label="Offer Code"
+  name="offerCode"
+  value={formData.offerCode}
+  onChange={handleChange}
+/>
 
             <Input
               label="Offer Name"
-              name="name"
-              value={formData.name}
+             name="offerName"
+value={formData.offerName}
               onChange={handleChange}
             />
 
             <Select
               label="Offer Type"
-              name="type"
-              value={formData.type}
+             name="offerType"
+value={formData.offerType}
               onChange={handleChange}
               options={["Percentage", "Flat"]}
             />
 
             <Input
               label="Discount Value"
-              name="discount"
-              value={formData.discount}
+name="discountValue"
+value={formData.discountValue}
               onChange={handleChange}
             />
 
             <Input
               label="Minimum Order Amount"
-              name="minOrderAmount"
-              value={formData.minOrderAmount}
+           name="minimumOrderAmount"
+value={formData.minimumOrderAmount}
               onChange={handleChange}
             />
 
@@ -161,17 +208,17 @@ const OfferModal = ({ isOpen, data, onClose }) => {
           {/* Services */}
 
           <div>
-            <label className="mb-3 block font-medium text-gray-900 dark:text-white">
+            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
               Applicable Services
             </label>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {services.map((service) => (
                 <button
                   type="button"
                   key={service}
                   onClick={() => toggleService(service)}
-                  className={`rounded-full border px-4 py-2 text-sm transition ${
+                  className={`rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition ${
                     formData.applicableServices.includes(service)
                       ? "border-[#231F20] dark:border-[#E8A843] bg-[#231F20] dark:bg-[#E8A843] text-white"
                       : "border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -186,34 +233,34 @@ const OfferModal = ({ isOpen, data, onClose }) => {
           {/* Description */}
 
           <div>
-            <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+            <label className="mb-1.5 block text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
               Description
             </label>
 
             <textarea
-              rows={4}
-              name="description"
-              value={formData.description}
+              rows={3}
+             name="offerDescription"
+value={formData.offerDescription}
               onChange={handleChange}
               placeholder="Offer description..."
-              className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
+              className="w-full rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843] resize-none"
             />
           </div>
 
           {/* Footer */}
 
-          <div className="flex justify-end gap-3 border-t border-gray-200 dark:border-gray-800 pt-5">
+          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-3 border-t border-gray-200 dark:border-gray-800 pt-3">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-gray-300 dark:border-gray-700 px-5 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-[#231F20] dark:bg-[#E8A843] px-6 py-2 text-white hover:opacity-90"
+              className="rounded-lg sm:rounded-xl bg-[#231F20] dark:bg-[#E8A843] px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium text-white dark:text-[#231F20] hover:opacity-90 transition-opacity"
             >
               {data ? "Update Offer" : "Save Offer"}
             </button>
@@ -232,14 +279,14 @@ const Input = ({
   ...props
 }) => (
   <div>
-    <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+    <label className="mb-1.5 block text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
       {label}
     </label>
 
     <input
       type={type}
       {...props}
-      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
+      className="w-full rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843] transition-colors"
     />
   </div>
 );
@@ -250,13 +297,13 @@ const Select = ({
   ...props
 }) => (
   <div>
-    <label className="mb-2 block font-medium text-gray-900 dark:text-white">
+    <label className="mb-1.5 block text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
       {label}
     </label>
 
     <select
       {...props}
-      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843]"
+      className="w-full rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800/50 px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 outline-none focus:border-[#E8A843] cursor-pointer transition-colors"
     >
       {options.map((option) => (
         <option

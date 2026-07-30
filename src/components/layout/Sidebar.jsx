@@ -20,7 +20,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           top-0 left-0
           z-50
           h-screen
-          w-64
+          w-60
           bg-white dark:bg-[#1a1a1a]
           border-r border-gray-200 dark:border-gray-800
           shadow-lg
@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Logo */}
-        <div className="h-16 md:h-16 flex items-center gap-3 px-6 border-b border-gray-100 dark:border-gray-800">
+        <div className="h-14 md:h-14 flex items-center gap-3 px-4 border-b border-gray-100 dark:border-gray-800">
             <div className="p-2 rounded-xl bg-[#E8A843]/10">
             <WashingMachine
               size={18}
@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto px-4 py-2 space-y-1">
+        <nav className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
           {navigation.map((item) => {
             const Icon = item.icon;
 

@@ -1,5 +1,11 @@
 import { createContext, useContext, useMemo, useState, useEffect } from "react";
-import mockData from "../mock-data.json";
+import {
+  getOffers,
+  createOffer,
+  updateOffer as updateOfferApi,
+  deleteOffer as deleteOfferApi,
+} from "../api/offerApi";
+
 
 const OfferContext = createContext();
 
@@ -14,24 +20,34 @@ export const OfferProvider = ({ children }) => {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchOffers = async () => {
-    setLoading(true);
-    try {
-      // TODO: Replace with backend API call (e.g. axios.get("/api/offers"))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setOffers(mockData.offers);
-    } catch (error) {
-      console.error("Failed to fetch offers:", error);
-    } finally {
-      setLoading(false);
+const fetchOffers = async () => {
+  setLoading(true);
+
+  try {
+    const res = await getOffers();
+
+    if (res.data.success || res.data.isSuccess) {
+      setOffers(res.data.data);
+    } else {
+      setOffers([]);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setOffers([]);
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  fetchOffers();
+}, []);
 
   const filteredOffers = useMemo(() => {
     return offers.filter((offer) => {
-      const searchMatch = offer.name
-        ?.toLowerCase()
-        .includes(search.toLowerCase());
+     const searchMatch =
+  offer.offerName?.toLowerCase().includes(search.toLowerCase()) ||
+  offer.offerCode?.toLowerCase().includes(search.toLowerCase());
 
       const statusMatch =
         statusFilter === "All" ||
@@ -39,17 +55,67 @@ export const OfferProvider = ({ children }) => {
 
       const typeMatch =
         typeFilter === "All" ||
-        offer.type === typeFilter;
-
+offer.offerType === typeFilter
       return searchMatch && statusMatch && typeMatch;
     });
   }, [offers, search, statusFilter, typeFilter]);
 
-  const stats = {
+ const stats = {
+  total: offers.length,
   active: offers.filter((o) => o.status === "Active").length,
-  scheduled: offers.filter((o) => o.status === "Scheduled").length,
-  expired: offers.filter((o) => o.status === "Expired").length,
-  redeemed: offers.reduce((sum, o) => sum + (o.redeemed || 0), 0),
+  inactive: offers.filter((o) => o.status !== "Active").length,
+  totalDiscount: offers.reduce(
+    (sum, o) => sum + (Number(o.discountValue) || 0),
+    0
+  ),
+};
+
+const addOffer = async (offer) => {
+  try {
+    await createOffer(offer);
+    await fetchOffers();
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const updateOffer = async (offer) => {
+  try {
+    await updateOfferApi(offer.offerID, offer);
+    await fetchOffers();
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const deleteOffer = async (offerID) => {
+  try {
+    await deleteOfferApi(offerID);
+    await fetchOffers();
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const openAddModal = () => {
+  setSelectedOffer(null);
+  setIsModalOpen(true);
+};
+
+const openEditModal = (offer) => {
+  setSelectedOffer(offer);
+  setIsModalOpen(true);
+};
+
+const closeModal = () => {
+  setSelectedOffer(null);
+  setIsModalOpen(false);
 };
 
   const value = {
@@ -69,12 +135,15 @@ export const OfferProvider = ({ children }) => {
   setTypeFilter,
 
   selectedOffer,
-  setSelectedOffer,
-
   isModalOpen,
-  setIsModalOpen,
 
-  setOffers,
+  openAddModal,
+  openEditModal,
+  closeModal,
+
+  addOffer,
+  updateOffer,
+  deleteOffer,
 };
 
   return (

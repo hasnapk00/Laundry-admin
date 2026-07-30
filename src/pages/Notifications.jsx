@@ -30,20 +30,16 @@ const Notifications = () => {
     getFilteredNotifications,
   } = useNotifications();
 
-  // Filter states
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("All");
   const [readFilter, setReadFilter] = useState("All");
 
-  // Fetch notifications on mount
   useEffect(() => {
     fetchNotifications();
   }, []);
 
-  // Get filtered notifications
   const filteredNotifications = getFilteredNotifications(search, typeFilter, readFilter);
 
-  // Pagination Hook
   const {
     currentPage,
     setCurrentPage,
@@ -51,46 +47,43 @@ const Notifications = () => {
     paginatedData: paginatedNotifications,
   } = usePagination(filteredNotifications, 8);
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, typeFilter, readFilter, setCurrentPage]);
 
   const unreadCount = getUnreadCount();
 
-  // Show loading state
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-16">
+      <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E8A843] mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading notifications...</p>
+          <div className="animate-spin rounded-full h-9 w-9 border-b-2 border-[#E8A843] mx-auto"></div>
+          <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">Loading notifications...</p>
         </div>
       </div>
     );
   }
 
-  // Show error state
   if (error) {
     return (
-      <div className="rounded-2xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-5">
-        <h3 className="text-lg font-semibold text-red-700 dark:text-red-400">
+      <div className="rounded-xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-4">
+        <h3 className="text-base font-semibold text-red-700 dark:text-red-400">
           Error Loading Notifications
         </h3>
-        <p className="mt-2 text-sm text-red-600 dark:text-red-300">{error}</p>
+        <p className="mt-1.5 text-sm text-red-600 dark:text-red-300">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white sm:text-xl">
             Notifications
           </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
             {unreadCount > 0
               ? `You have ${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}`
               : "All caught up!"}
@@ -100,39 +93,39 @@ const Notifications = () => {
         {unreadCount > 0 && (
           <button
             onClick={markAllAsRead}
-            className="flex items-center gap-2 rounded-xl bg-[#E8A843] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#d49a3a] hover:shadow-md shadow-sm"
+            className="flex items-center justify-center gap-2 rounded-lg bg-[#E8A843] px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#d49a3a] hover:shadow-md shadow-sm"
           >
-            <Check size={18} />
+            <Check size={16} />
             Mark All as Read
           </button>
         )}
       </div>
 
       {/* Filters */}
-      <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+      <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 shadow-sm">
+        <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
           {/* Search */}
-          <div className="relative flex-1">
+          <div className="relative flex-1 min-w-0">
             <Search
-              size={18}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+              size={15}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
             />
             <input
               type="text"
               placeholder="Search notifications..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-2.5 pl-10 pr-4 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 focus:shadow-[0_0_0_3px_rgba(232,168,67,0.1)] text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 pl-9 pr-3 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 focus:shadow-[0_0_0_3px_rgba(232,168,67,0.1)] text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
             />
           </div>
 
           {/* Filters */}
-          <div className="flex gap-3 flex-wrap lg:flex-nowrap">
-            <div className="relative">
+          <div className="flex flex-wrap gap-2 sm:flex-nowrap">
+            <div className="relative flex-1 sm:flex-none sm:w-36">
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full appearance-none rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-2.5 pr-10 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+                className="w-full appearance-none rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-3 py-1.5 pr-8 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
               >
                 <option value="All">All Types</option>
                 <option value="success">Success</option>
@@ -141,24 +134,24 @@ const Notifications = () => {
                 <option value="info">Info</option>
               </select>
               <ChevronDown
-                size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
+                size={14}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
               />
             </div>
 
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-none sm:w-36">
               <select
                 value={readFilter}
                 onChange={(e) => setReadFilter(e.target.value)}
-                className="w-full appearance-none rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-2.5 pr-10 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
+                className="w-full appearance-none rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-3 py-1.5 pr-8 text-sm outline-none transition-all duration-200 focus:border-[#E8A843] focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-white cursor-pointer"
               >
                 <option value="All">All Status</option>
                 <option value="Unread">Unread</option>
                 <option value="Read">Read</option>
               </select>
               <ChevronDown
-                size={16}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
+                size={14}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none"
               />
             </div>
           </div>
@@ -166,7 +159,7 @@ const Notifications = () => {
       </div>
 
       {/* Notifications List */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {paginatedNotifications.length > 0 ? (
           paginatedNotifications.map((notification) => (
             <NotificationCard
@@ -215,15 +208,15 @@ const NotificationCard = ({
   const getTypeIcon = () => {
     switch (type) {
       case "success":
-        return <CheckCircle className="text-green-600 dark:text-green-400" size={24} />;
+        return <CheckCircle className="text-green-600 dark:text-green-400" size={20} />;
       case "error":
-        return <AlertCircle className="text-red-600 dark:text-red-400" size={24} />;
+        return <AlertCircle className="text-red-600 dark:text-red-400" size={20} />;
       case "warning":
-        return <AlertTriangle className="text-yellow-600 dark:text-yellow-400" size={24} />;
+        return <AlertTriangle className="text-yellow-600 dark:text-yellow-400" size={20} />;
       case "info":
-        return <Info className="text-blue-600 dark:text-blue-400" size={24} />;
+        return <Info className="text-blue-600 dark:text-blue-400" size={20} />;
       default:
-        return <Bell className="text-gray-600 dark:text-gray-400" size={24} />;
+        return <Bell className="text-gray-600 dark:text-gray-400" size={20} />;
     }
   };
 
@@ -259,20 +252,20 @@ const NotificationCard = ({
   return (
     <div
       onClick={() => link && onNavigate?.(notification)}
-      className={`rounded-xl border-2 p-4 transition-all duration-200 ${getTypeColor()} ${
+      className={`rounded-lg border-2 p-3 transition-all duration-200 ${getTypeColor()} ${
         !read ? "shadow-md" : "shadow-sm"
       } ${link ? "cursor-pointer hover:shadow-md" : ""}`}
     >
-      <div className="flex gap-4">
+      <div className="flex gap-3">
         {/* Icon */}
-        <div className="flex-shrink-0 mt-1">{getTypeIcon()}</div>
+        <div className="mt-0.5 flex-shrink-0">{getTypeIcon()}</div>
 
         {/* Content */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h3
-                className={`font-semibold ${
+                className={`truncate text-sm font-semibold ${
                   read
                     ? "text-gray-700 dark:text-gray-300"
                     : "text-gray-900 dark:text-white font-bold"
@@ -280,27 +273,24 @@ const NotificationCard = ({
               >
                 {title}
               </h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-400">
                 {message}
               </p>
-              <p className="mt-2 text-xs text-gray-500 dark:text-gray-500">
+              <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-500">
                 {formatTime(timestamp)}
               </p>
             </div>
 
             <div className="flex flex-shrink-0 items-center gap-2">
-              {/* Unread Badge */}
-              {!read && (
-                <div className="h-3 w-3 rounded-full bg-[#E8A843]"></div>
-              )}
+              {!read && <div className="h-2.5 w-2.5 rounded-full bg-[#E8A843]"></div>}
               {link && (
-                <ChevronRight size={18} className="text-gray-400 dark:text-gray-500" />
+                <ChevronRight size={16} className="text-gray-400 dark:text-gray-500" />
               )}
             </div>
           </div>
 
           {/* Actions */}
-          <div className="mt-3 flex gap-2" onClick={(e) => e.stopPropagation()}>
+          <div className="mt-2 flex gap-2" onClick={(e) => e.stopPropagation()}>
             {!read ? (
               <button
                 onClick={() => onMarkAsRead(id)}
@@ -333,15 +323,15 @@ const NotificationCard = ({
 // ============== Empty State ==============
 
 const EmptyNotifications = () => (
-  <div className="rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 py-16 px-6">
+  <div className="rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 py-12 px-4">
     <div className="flex flex-col items-center">
-      <div className="rounded-full bg-gray-200 dark:bg-gray-700 p-4">
-        <Bell size={32} className="text-gray-400 dark:text-gray-500" />
+      <div className="rounded-full bg-gray-200 dark:bg-gray-700 p-3">
+        <Bell size={26} className="text-gray-400 dark:text-gray-500" />
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-700 dark:text-gray-300">
+      <h3 className="mt-3 text-base font-semibold text-gray-700 dark:text-gray-300">
         No Notifications Found
       </h3>
-      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      <p className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
         Try adjusting your filters or search criteria
       </p>
     </div>

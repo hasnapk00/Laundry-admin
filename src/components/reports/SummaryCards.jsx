@@ -69,7 +69,7 @@ const SummaryCards = ({
 
   if (loading) {
     return (
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         {[1, 2, 3, 4].map((index) => (
           <div
             key={index}
@@ -81,7 +81,7 @@ const SummaryCards = ({
   }
 
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
       {cards.map((card) => (
         <SummaryCard
           key={card.id}
@@ -104,15 +104,17 @@ const SummaryCard = ({ title, value, icon, iconBgColor = "bg-gray-100", trend })
 
   return (
     <div className="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm transition-all hover:shadow-md">
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>
-          <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium text-gray-500 dark:text-gray-400">
+            {title}
+          </p>
+          <h3 className="mt-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-2xl">
             {value}
           </h3>
 
           {hasTrend && (
-            <div className="mt-2 flex items-center gap-1">
+            <div className="mt-2 flex flex-wrap items-center gap-1">
               <span
                 className={`text-xs font-medium ${
                   trendUp ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
@@ -125,7 +127,7 @@ const SummaryCard = ({ title, value, icon, iconBgColor = "bg-gray-100", trend })
           )}
         </div>
 
-        <div className={`rounded-xl p-2.5 ${iconBgColor} transition-colors group-hover:scale-105`}>
+        <div className={`shrink-0 rounded-xl p-2.5 ${iconBgColor} transition-colors group-hover:scale-105`}>
           {icon}
         </div>
       </div>

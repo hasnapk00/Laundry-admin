@@ -39,29 +39,38 @@ const ProfileSettings = () => {
     }
   };
 
-  const initials = formData.fullName
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2) || "A";
+  const initials =
+    formData.fullName
+      .split(" ")
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2) || "A";
 
   return (
-    <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] shadow-sm transition-colors duration-200">
+    <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] shadow-sm transition-colors duration-200">
       {/* Header */}
-      <div className="border-b border-gray-100 dark:border-gray-800 px-6 py-5 transition-colors">
-        <h2 className="text-2xl font-semibold text-[#231F20] dark:text-white">Profile Settings</h2>
-        <p className="mt-1 text-gray-500 dark:text-gray-400">Update your profile information.</p>
+      <div className="border-b border-gray-100 dark:border-gray-800 px-4 py-4 transition-colors sm:px-6 sm:py-5">
+        <h2 className="text-lg font-semibold text-[#231F20] dark:text-white sm:text-xl">
+          Profile Settings
+        </h2>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          Update your profile information.
+        </p>
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-6 p-6">
+      <form onSubmit={handleSubmit} className="space-y-5 p-4 sm:p-6">
         {/* Profile Image */}
-        <div className="flex items-center gap-6">
-          <div className="relative">
-            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#F4EFD9] dark:bg-[#E8A843]/10 text-3xl font-bold text-[#231F20] dark:text-[#E8A843]">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="relative shrink-0">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#F4EFD9] dark:bg-[#E8A843]/10 text-2xl font-bold text-[#231F20] dark:text-[#E8A843] sm:h-24 sm:w-24 sm:text-3xl">
               {image ? (
-                <img src={image} alt="Profile" className="h-full w-full rounded-full object-cover" />
+                <img
+                  src={image}
+                  alt="Profile"
+                  className="h-full w-full rounded-full object-cover"
+                />
               ) : (
                 initials
               )}
@@ -70,7 +79,7 @@ const ProfileSettings = () => {
               htmlFor="profile-image"
               className="absolute -bottom-1 -right-1 cursor-pointer rounded-full bg-[#E8A843] p-1.5 shadow-md hover:bg-[#d79a2d]"
             >
-              <Camera size={16} className="text-white" />
+              <Camera size={14} className="text-white" />
             </label>
             <input
               ref={fileInputRef}
@@ -81,14 +90,18 @@ const ProfileSettings = () => {
               className="hidden"
             />
           </div>
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Click the camera icon to upload</p>
-            <p className="text-xs text-gray-400 dark:text-gray-500">JPEG, PNG, WEBP (Max 2MB)</p>
+          <div className="min-w-0">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Click the camera icon to upload
+            </p>
+            <p className="text-xs text-gray-400 dark:text-gray-500">
+              JPEG, PNG, WEBP (Max 2MB)
+            </p>
           </div>
         </div>
 
         {/* Input Fields */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           <InputField
             label="Full Name"
             name="fullName"
@@ -125,12 +138,12 @@ const ProfileSettings = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-2 rounded-xl bg-[#231F20] dark:bg-zinc-800 px-6 py-3 text-white transition hover:opacity-90 dark:hover:bg-zinc-700 disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#231F20] dark:bg-zinc-800 px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90 dark:hover:bg-zinc-700 disabled:opacity-50 sm:w-auto sm:py-3"
           >
             {loading ? (
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
             ) : (
-              <Save size={18} />
+              <Save size={17} />
             )}
             {loading ? "Saving..." : "Save Changes"}
           </button>
@@ -142,14 +155,16 @@ const ProfileSettings = () => {
 
 const InputField = ({ label, name, value, onChange, placeholder, type = "text" }) => (
   <div>
-    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+    <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+      {label}
+    </label>
     <input
       type={type}
       name={name}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 px-4 py-3 outline-none transition focus:border-[#E8A843]"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-800/80 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3.5 py-2.5 text-sm outline-none transition focus:border-[#E8A843]"
     />
   </div>
 );

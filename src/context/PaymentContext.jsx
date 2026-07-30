@@ -1,86 +1,101 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import mockData from "../mock-data.json"
-
+import {
+  getPayments,
+  updatePaymentStatusApi,
+} from "../api/paymentApi";
 
 const PaymentContext = createContext();
 
 export const PaymentProvider = ({ children }) => {
   const [payments, setPayments] = useState([]);
+  const [summary, setSummary] = useState({
+  totalPayments: 0,
+  paidPayments: 0,
+  pendingPayments: 0,
+  revenue: 0,
+});
   const [loading, setLoading] = useState(false);
 
   const fetchPayments = async () => {
     setLoading(true);
+
     try {
-      // TODO: Replace with backend API call (e.g. axios.get("/api/payments"))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-            setPayments(mockData.payments);
+      const res = await getPayments();
+
+      if (res.data.success || res.data.isSuccess) {
+  const data = res.data.data || {};
+
+  setPayments(Array.isArray(data.payments) ? data.payments : []);
+
+  setSummary(
+    data.summary || {
+      totalPayments: 0,
+      paidPayments: 0,
+      pendingPayments: 0,
+      revenue: 0,
+    }
+  );
+} else {
+  setPayments([]);
+  setSummary({
+    totalPayments: 0,
+    paidPayments: 0,
+    pendingPayments: 0,
+    revenue: 0,
+  });
+}
 
     } catch (error) {
-      console.error("Failed to fetch payments:", error);
+      console.error(error);
+      setPayments([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPayments();   // ← load once when the app/provider mounts
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      fetchPayments();
+    }
   }, []);
 
-  const addPayment = async (paymentData) => {
-    setLoading(true);
-    try {
-      // TODO: Replace with backend API call (e.g. axios.post("/api/payments", paymentData))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      const newPayment = {
-        ...paymentData,
-        id: payments.length + 1,
-        paymentId: `PAY${String(payments.length + 1).padStart(3, "0")}`,
-        date: new Date().toLocaleDateString("en-IN", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        }),
-      };
-      setPayments((prev) => [newPayment, ...prev]);
-      return newPayment;
-    } catch (error) {
-      console.error("Failed to add payment:", error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   const getPaymentSummary = () => {
-    // Calculates summary statistics based on current payments list
-    const summary = {
-      total: payments.length,
-      paid: payments.filter((p) => p.status === "Paid").length,
-      pending: payments.filter((p) => p.status === "Pending").length,
-      revenue: payments
-        .filter((p) => p.status === "Paid")
-        .reduce((sum, p) => sum + (Number(p.amount) || 0), 0),
-    };
-    return summary;
+  const list = Array.isArray(payments) ? payments : [];
+  return {
+    total: list.length,
+    paid: list.filter((p) => p.status === "Paid").length,
+    pending: list.filter((p) => p.status === "Pending").length,
+    revenue: list
+      .filter((p) => p.paymentStatus === "Paid")
+      .reduce((sum, p) => sum + (Number(p.totalAmount) || 0), 0),
   };
+};
 
-  const getPaymentById = (id) => {
-    return payments.find((p) => String(p.id) === String(id) || String(p.paymentId) === String(id)) || null;
-  };
+const getPaymentById = (id) => {
+  const list = Array.isArray(payments) ? payments : [];
+  return (
+    list.find(
+String(p.paymentId) === String(id) ||
+String(p.orderId) === String(id)    ) || null
+  );
+};
 
-  const updatePaymentStatus = async (id, newStatus) => {
+  const updatePaymentStatus = async (id, status) => {
     setLoading(true);
+
     try {
-      // TODO: Replace with backend API call (e.g. axios.patch(`/api/payments/${id}`, { status: newStatus }))
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      setPayments((prev) =>
-        prev.map((p) =>
-          String(p.id) === String(id) ? { ...p, status: newStatus } : p
-        )
-      );
+      await updatePaymentStatusApi(id, status);
+
+      await fetchPayments();
+
+      return true;
     } catch (error) {
-      console.error("Failed to update payment status:", error);
-      throw error;
+      console.error(error);
+      return false;
     } finally {
       setLoading(false);
     }
@@ -88,15 +103,15 @@ export const PaymentProvider = ({ children }) => {
 
   return (
     <PaymentContext.Provider
-      value={{
-        payments,
-        loading,
-        fetchPayments,
-        addPayment,
-        getPaymentSummary,
-        getPaymentById,
-        updatePaymentStatus,
-      }}
+     value={{
+  payments,
+  summary,
+  loading,
+  fetchPayments,
+  getPaymentSummary,
+  getPaymentById,
+  updatePaymentStatus,
+}}
     >
       {children}
     </PaymentContext.Provider>

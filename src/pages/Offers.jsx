@@ -12,31 +12,28 @@ import { usePagination } from "../hooks/usePagination";
 
 const Offers = () => {
   const {
-    filteredOffers,
-    stats,
-    loading,
-    fetchOffers,
+  filteredOffers,
+  stats,
+  loading,
 
-    search,
-    setSearch,
+  search,
+  setSearch,
 
-    statusFilter,
-    setStatusFilter,
+  statusFilter,
+  setStatusFilter,
 
-    typeFilter,
-    setTypeFilter,
+  typeFilter,
+  setTypeFilter,
 
-    selectedOffer,
-    setSelectedOffer,
+  selectedOffer,
+  isModalOpen,
 
-    isModalOpen,
-    setIsModalOpen,
-  } = useOffer();
+  openAddModal,
+  openEditModal,
+  closeModal,
+} = useOffer();
 
-  useEffect(() => {
-    fetchOffers();
-  }, []);
-
+  
   // Pagination Hook
   const {
     currentPage,
@@ -45,15 +42,7 @@ const Offers = () => {
     paginatedData: paginatedOffers,
   } = usePagination(filteredOffers || [], 5);
 
-  const handleAddOffer = () => {
-    setSelectedOffer(null);
-    setIsModalOpen(true);
-  };
 
-  const handleEditOffer = (offer) => {
-    setSelectedOffer(offer);
-    setIsModalOpen(true);
-  };
 
   // Reset to first page when filters change
   useEffect(() => {
@@ -61,17 +50,17 @@ const Offers = () => {
   }, [search, statusFilter, typeFilter, setCurrentPage]);
 
   return (
-    <div className="space-y-4 md:space-y-5">
+    <div className="space-y-2 md:space-y-3">
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
 
-        <h1 className="text-xl font-bold text-[#231F20] dark:text-white">
+        <h1 className="text-lg sm:text-xl font-bold text-[#231F20] dark:text-white">
           Offers
         </h1>
 
         <button
-          onClick={handleAddOffer}
-          className="flex items-center gap-2 rounded-xl bg-[#231F20] dark:bg-zinc-800 hover:bg-[#3a3335] dark:hover:bg-zinc-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200"
+          onClick={openAddModal}
+          className="flex items-center gap-2 rounded-lg sm:rounded-xl bg-[#231F20] dark:bg-zinc-800 hover:bg-[#3a3335] dark:hover:bg-zinc-700 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-sm transition-all duration-200 w-fit"
         >
           <Plus size={16} />
           Add Offer
@@ -90,11 +79,11 @@ const Offers = () => {
         setTypeFilter={setTypeFilter}
       />
 
-      <OffersTable
-        offers={paginatedOffers}
-        onEdit={handleEditOffer}
-        loading={loading}
-      />
+     <OffersTable
+  offers={paginatedOffers}
+  onEdit={openEditModal}
+  loading={loading}
+/>
 
       {/* Pagination */}
       <Pagination
@@ -106,11 +95,11 @@ const Offers = () => {
         label="offers"
       />
 
-      <OfferModal
-        isOpen={isModalOpen}
-        data={selectedOffer}
-        onClose={() => setIsModalOpen(false)}
-      />
+     <OfferModal
+  isOpen={isModalOpen}
+  data={selectedOffer}
+  onClose={closeModal}
+/>
 
     </div>
   );

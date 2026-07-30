@@ -8,26 +8,21 @@ const OrderTracking = () => {
   const order = {
     id: "ORD001",
     status: "Washing",
-
     pickupAddress: "ABC Laundry, Calicut, Kerala",
-
     deliveryAddress: "Rahul Sharma, Kottakkal, Malappuram, Kerala",
-
     expectedDelivery: "20 Jul 2026",
-
     latitude: 11.2588,
     longitude: 75.7804,
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 sm:space-y-3">
       {/* Header */}
       <TrackingHeader order={order} />
 
       {/* Details + Status */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 sm:gap-3 lg:grid-cols-2">
         <DeliveryDetailsCard order={order} />
-
         <UpdateStatusCard order={order} />
       </div>
 

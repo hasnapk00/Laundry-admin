@@ -42,7 +42,7 @@ const Settings = () => {
   const activeMenuItem = MENU_ITEMS.find((item) => item.id === activeSection);
 
   return (
-    <div className="space-y-4 md:space-y-5">
+    <div className="space-y-3 sm:space-y-4">
       {/* Page Header */}
       <PageHeader />
 
@@ -65,7 +65,7 @@ const PageHeader = () => (
   <div>
     <div className="flex items-center gap-3">
       <div>
-        <h1 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">Settings</h1>
+        <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white tracking-tight">Settings</h1>
       </div>
     </div>
   </div>
@@ -78,8 +78,8 @@ const SettingsNavigation = ({
   activeSection,
   onSectionChange,
 }) => (
-  <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-1 shadow-sm transition-colors duration-200">
-    <div className="flex flex-wrap gap-1.5">
+  <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-1 shadow-sm transition-colors duration-200 overflow-x-auto">
+    <div className="flex gap-1 sm:gap-1.5 min-w-max sm:min-w-0 sm:flex-wrap">
       {menuItems.map((item) => {
         const Icon = item.icon;
         const isActive = activeSection === item.id;
@@ -89,8 +89,8 @@ const SettingsNavigation = ({
             key={item.id}
             onClick={() => onSectionChange(item.id)}
             className={`
-              group relative flex items-center gap-2 rounded-xl px-4 py-2 
-              text-xs font-semibold transition-all duration-200
+               flex items-center gap-1.5 rounded-lg px-3 py-1.5 
+              text-xs font-semibold whitespace-nowrap transition-all duration-200
               ${
                 isActive
                   ? "bg-[#E8A843] text-white shadow-md shadow-[#E8A843]/20"
@@ -101,8 +101,8 @@ const SettingsNavigation = ({
             aria-current={isActive ? "page" : undefined}
           >
             <Icon
-              size={15}
-              className={`transition-transform duration-200 ${
+              size={14}
+              className={`shrink-0 transition-transform duration-200 ${
                 isActive ? "scale-110" : "group-hover:scale-105"
               }`}
             />
@@ -110,7 +110,7 @@ const SettingsNavigation = ({
 
             {/* Active indicator dot */}
             {isActive && (
-              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-white/80" />
+              <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-white/80" />
             )}
           </button>
         );

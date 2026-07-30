@@ -13,7 +13,7 @@ export default function DashboardLayout() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header setIsSidebarOpen={setIsOpen} />
 
-        <main className="flex-1 overflow-y-auto p-4 sm:p-5 md:p-6">
+        <main className="flex-1 overflow-y-auto p-2 sm:p-3 md:p-4">
           <Outlet />
         </main>
       </div>

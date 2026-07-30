@@ -7,33 +7,28 @@ import {
 import StatCard from "../components/dashboard/StatCard";
 import RevenueChart from "../components/dashboard/RevenueChart";
 import OrderStatusChart from "../components/dashboard/OrderStatusChart";
-import { useOrders } from "../context/OrderContext";
-import { usePayments } from "../context/PaymentContext";
 import { useDashboard } from "../context/DashboardContext";
 
 export default function Dashboard() {
-const {
-  totalOrders,
-  pendingOrders,
-  completedOrders,
-  paymentSummary,
+  const {
+  stats,
+  loading,
 } = useDashboard();
 
   return (
-    <div className="space-y-4 md:space-y-5">
+    <div className="space-y-4 md:space-y-5 max-w-full overflow-x-hidden">
       {/* Heading */}
       <div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white tracking-tight">
           Dashboard Overview
         </h2>
-        
       </div>
 
       {/* Statistics */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Total Orders"
-          value={totalOrders.toLocaleString()}
+value={(stats.totalOrders ?? 0).toLocaleString()}
           change="+0% this month"
           icon={Package}
           iconBg="bg-[#E8A843]/10"
@@ -42,7 +37,7 @@ const {
         />
         <StatCard
           title="Revenue"
-          value={`₹${paymentSummary.revenue.toLocaleString()}`}
+value={`₹${(stats.totalRevenue ?? 0).toLocaleString()}`}
           change="+0% this month"
           icon={IndianRupee}
           iconBg="bg-green-100 dark:bg-green-900/20"
@@ -51,7 +46,7 @@ const {
         />
         <StatCard
           title="Pending Orders"
-          value={pendingOrders.toLocaleString()}
+value={(stats.pendingOrders ?? 0).toLocaleString()}
           change="+0 today"
           icon={Clock3}
           iconBg="bg-yellow-100 dark:bg-yellow-900/20"
@@ -60,7 +55,7 @@ const {
         />
         <StatCard
           title="Completed"
-          value={completedOrders.toLocaleString()}
+value={(stats.completedOrders ?? 0).toLocaleString()}
           change="+0 today"
           icon={CircleCheckBig}
           iconBg="bg-blue-100 dark:bg-blue-900/20"
@@ -68,17 +63,16 @@ const {
           changeColor="text-blue-600"
         />
       </div>
+
+      {/* Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-
-    <div className="xl:col-span-2">
-
-        <RevenueChart />
-
-    </div>
-
-    <OrderStatusChart />
-
-</div>
+        <div className="xl:col-span-2 min-w-0">
+          <RevenueChart />
+        </div>
+        <div className="min-w-0">
+          <OrderStatusChart />
+        </div>
+      </div>
     </div>
   );
 }

@@ -15,53 +15,29 @@ const OrderInfoCard = ({ order }) => {
   };
 
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">
+    <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 sm:p-4 shadow-sm">
+      <h2 className="mb-3 sm:mb-3 text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
         Order Information
       </h2>
 
-      <div className="space-y-2.5">
-        <InfoRow
-          icon={<Hash size={15} />}
-          label="Order ID"
-          value={order.id}
-        />
-
-        <InfoRow
-          icon={<CalendarDays size={15} />}
-          label="Order Date"
-          value={order.orderDate}
-        />
-
-        <InfoRow
-          icon={<Truck size={15} />}
-          label="Pickup Date"
-          value={order.pickupDate}
-        />
-
-        <InfoRow
-          icon={<Truck size={15} />}
-          label="Delivery Date"
-          value={order.deliveryDate}
-        />
-
-        <InfoRow
-          icon={<CreditCard size={15} />}
-          label="Payment Method"
-          value={order.paymentMethod}
-        />
+      <div className="space-y-2.5 sm:space-y-3">
+        <InfoRow icon={<Hash size={15} />} label="Order ID" value={order.orderID} />
+        <InfoRow icon={<CalendarDays size={15} />} label="Order Date" value={order.orderDate} />
+        <InfoRow icon={<Truck size={15} />} label="Pickup Date" value={order.pickupDate} />
+        <InfoRow icon={<Truck size={15} />} label="Delivery Date" value={order.deliveryDate} />
+        <InfoRow icon={<CreditCard size={15} />} label="Payment Method" value={order.paymentMethod} />
 
         <div className="flex items-start gap-3 pt-0.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E8A843]/10 text-[#E8A843] flex-shrink-0">
             <CircleDollarSign size={15} />
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <p className="text-[10px] font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
               Payment Status
             </p>
             <span
-              className={`mt-0.5 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${
+              className={`mt-0.5 inline-flex max-w-full truncate rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${
                 paymentStatusColor[order.paymentStatus] ||
                 "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
               }`}

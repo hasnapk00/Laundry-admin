@@ -51,28 +51,28 @@ const PickupDeliveryDetails = () => {
 
   if (loading && !pickupDelivery) {
     return (
-      <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-10 text-center shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
-        <h2 className="text-xl font-medium text-gray-600 dark:text-gray-400">Loading...</h2>
+      <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-6 sm:p-8 text-center shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
+        <h2 className="text-lg font-medium text-gray-600 dark:text-gray-400">Loading...</h2>
       </div>
     );
   }
 
   if (!pickupDelivery) {
     return (
-      <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-10 text-center shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800">
-          <PackageSearch size={28} className="text-gray-400 dark:text-zinc-500" />
+      <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-6 sm:p-8 text-center shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800">
+          <PackageSearch size={22} className="text-gray-400 dark:text-zinc-500" />
         </div>
-        <h2 className="mt-5 text-2xl font-semibold text-[#231F20] dark:text-white">
+        <h2 className="mt-3 text-lg sm:text-xl font-semibold text-[#231F20] dark:text-white">
           Pickup / Delivery Not Found
         </h2>
-        <p className="mt-2 text-gray-500 dark:text-gray-400">
+        <p className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
           We couldn't find a record matching this ID.
         </p>
 
         <button
           onClick={() => navigate("/pickup")}
-          className="mt-6 rounded-xl bg-[#231F20] dark:bg-zinc-800 px-5 py-3 text-white transition hover:opacity-90 dark:hover:bg-zinc-700"
+          className="mt-4 rounded-lg bg-[#231F20] dark:bg-zinc-800 px-4 py-2 text-sm text-white transition hover:opacity-90 dark:hover:bg-zinc-700"
         >
           Back to Pickup &amp; Delivery
         </button>
@@ -100,27 +100,27 @@ const PickupDeliveryDetails = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 p-2 sm:p-3 md:space-y-4 md:p-4">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={() => navigate("/pickup")}
-            className="rounded-lg border border-gray-300 dark:border-gray-700 p-2 text-gray-700 dark:text-gray-300 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="rounded-lg border border-gray-300 dark:border-gray-700 p-1.5 text-gray-700 dark:text-gray-300 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
             aria-label="Go back"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={16} />
           </button>
 
           <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="text-3xl font-bold tracking-tight text-[#231F20] dark:text-white">
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-lg sm:text-xl font-bold tracking-tight text-[#231F20] dark:text-white">
                 {isPickup ? "Pickup" : "Delivery"} Details
               </h1>
               <TypeBadge isPickup={isPickup} />
             </div>
-            <p className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
-              <Hash size={13} />
+            <p className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+              <Hash size={12} />
               <span className="font-medium text-gray-700 dark:text-gray-300">
                 {isPickup ? pickupDelivery.pickup_id : pickupDelivery.delivery_id}
               </span>
@@ -131,17 +131,17 @@ const PickupDeliveryDetails = () => {
         <StatusPill status={pickupDelivery.status} large />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-3 md:gap-4 lg:grid-cols-3">
         {/* Left column */}
-        <div className="space-y-6 lg:col-span-2">
+        <div className="space-y-3 md:space-y-4 lg:col-span-2">
           {/* Customer */}
-          <Section title="Customer Information" icon={<User size={18} />}>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <InfoRow icon={<User size={16} />} label="Customer" value={pickupDelivery.customer_name} />
-              <InfoRow icon={<Phone size={16} />} label="Phone" value={pickupDelivery.phone} />
-              <InfoRow icon={<Hash size={16} />} label="Order ID" value={pickupDelivery.order_id} />
+          <Section title="Customer Information" icon={<User size={16} />}>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <InfoRow icon={<User size={14} />} label="Customer" value={pickupDelivery.customer_name} />
+              <InfoRow icon={<Phone size={14} />} label="Phone" value={pickupDelivery.phone} />
+              <InfoRow icon={<Hash size={14} />} label="Order ID" value={pickupDelivery.order_id} />
               <InfoRow
-                icon={<Hash size={16} />}
+                icon={<Hash size={14} />}
                 label={isPickup ? "Pickup ID" : "Delivery ID"}
                 value={isPickup ? pickupDelivery.pickup_id : pickupDelivery.delivery_id}
               />
@@ -150,43 +150,43 @@ const PickupDeliveryDetails = () => {
 
           {/* Pickup / Delivery Logistics */}
           {isPickup ? (
-            <Section title="Pickup Information" icon={<Truck size={18} />}>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <InfoRow icon={<Calendar size={16} />} label="Pickup Date" value={pickupDelivery.pickup_date} />
-                <InfoRow icon={<Clock size={16} />} label="Pickup Time" value={pickupDelivery.pickup_time} />
+            <Section title="Pickup Information" icon={<Truck size={16} />}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <InfoRow icon={<Calendar size={14} />} label="Pickup Date" value={pickupDelivery.pickup_date} />
+                <InfoRow icon={<Clock size={14} />} label="Pickup Time" value={pickupDelivery.pickup_time} />
               </div>
-              <div className="mt-5">
-                <InfoRow icon={<MapPin size={16} />} label="Pickup Address" value={pickupDelivery.pickup_address} />
+              <div className="mt-3">
+                <InfoRow icon={<MapPin size={14} />} label="Pickup Address" value={pickupDelivery.pickup_address} />
               </div>
             </Section>
           ) : (
-            <Section title="Delivery Information" icon={<Truck size={18} />}>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <InfoRow icon={<Calendar size={16} />} label="Delivery Date" value={pickupDelivery.delivery_date} />
-                <InfoRow icon={<Clock size={16} />} label="Delivery Time" value={pickupDelivery.delivery_time} />
+            <Section title="Delivery Information" icon={<Truck size={16} />}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <InfoRow icon={<Calendar size={14} />} label="Delivery Date" value={pickupDelivery.delivery_date} />
+                <InfoRow icon={<Clock size={14} />} label="Delivery Time" value={pickupDelivery.delivery_time} />
               </div>
-              <div className="mt-5">
-                <InfoRow icon={<MapPin size={16} />} label="Delivery Address" value={pickupDelivery.delivery_address} />
+              <div className="mt-3">
+                <InfoRow icon={<MapPin size={14} />} label="Delivery Address" value={pickupDelivery.delivery_address} />
               </div>
             </Section>
           )}
         </div>
 
         {/* Right column - Update status */}
-        <div className="lg:sticky lg:top-6">
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
-            <h2 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Update Status</h2>
-            <p className="mb-5 text-sm text-gray-500 dark:text-gray-400">
+        <div className="lg:sticky lg:top-4">
+          <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 sm:p-4 shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
+            <h2 className="mb-1 text-sm sm:text-base font-semibold text-gray-900 dark:text-white">Update Status</h2>
+            <p className="mb-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
               Change the current status of this {isPickup ? "pickup" : "delivery"}.
             </p>
 
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">
+            <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">
               Status
             </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-800/80 text-gray-900 dark:text-white px-4 py-3 outline-none focus:border-[#E8A843] focus:ring-1 focus:ring-[#E8A843] transition-colors"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-800/80 text-gray-900 dark:text-white px-3 py-2 text-sm outline-none focus:border-[#E8A843] focus:ring-1 focus:ring-[#E8A843] transition-colors"
             >
               <option value="">Select Status</option>
               <option>Scheduled</option>
@@ -199,15 +199,15 @@ const PickupDeliveryDetails = () => {
             <button
               onClick={handleSave}
               disabled={!status || !isDirty || saving}
-              className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#231F20] dark:bg-[#E8A843] px-6 py-3 text-white dark:text-[#231F20] font-medium hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-40"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-[#231F20] dark:bg-[#E8A843] px-4 py-2 text-sm text-white dark:text-[#231F20] font-medium hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <Save size={18} />
+              <Save size={16} />
               {saving ? "Saving..." : "Save Changes"}
             </button>
 
             {isCancelled && (
-              <div className="mt-4 flex items-start gap-2 rounded-xl bg-red-50 dark:bg-red-950/20 p-3 text-sm text-red-700 dark:text-red-400">
-                <XCircle size={16} className="mt-0.5 flex-none" />
+              <div className="mt-3 flex items-start gap-2 rounded-lg bg-red-50 dark:bg-red-950/20 p-2.5 text-xs sm:text-sm text-red-700 dark:text-red-400">
+                <XCircle size={14} className="mt-0.5 flex-none" />
                 <span>This {isPickup ? "pickup" : "delivery"} has been cancelled.</span>
               </div>
             )}
@@ -221,32 +221,32 @@ const PickupDeliveryDetails = () => {
 // ============== Shared Sub-Components ==============
 
 const Section = ({ title, icon, children }) => (
-  <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
-    <div className="mb-5 flex items-center gap-2.5">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F4EFD9] dark:bg-[#E8A843]/10 text-[#E8A843]">
+  <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 sm:p-4 shadow-sm text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <div className="mb-3 flex items-center gap-2">
+      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F4EFD9] dark:bg-[#E8A843]/10 text-[#E8A843]">
         {icon}
       </div>
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
+      <h2 className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white">{title}</h2>
     </div>
     {children}
   </div>
 );
 
 const InfoRow = ({ icon, label, value }) => (
-  <div className="flex items-start gap-3">
-    <div className="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400">
+  <div className="flex items-start gap-2.5">
+    <div className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400">
       {icon}
     </div>
     <div className="min-w-0">
       <p className="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-gray-500">{label}</p>
-      <p className="mt-0.5 truncate font-medium text-gray-900 dark:text-white">{value || "-"}</p>
+      <p className="mt-0.5 truncate text-sm font-medium text-gray-900 dark:text-white">{value || "-"}</p>
     </div>
   </div>
 );
 
 const TypeBadge = ({ isPickup }) => (
   <span
-    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${
+    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-wide ${
       isPickup
         ? "bg-[#F4EFD9] dark:bg-[#E8A843]/10 text-[#8a6a1c] dark:text-[#E8A843]"
         : "bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400"
@@ -267,7 +267,7 @@ const STATUS_STYLES = {
 const StatusPill = ({ status, large }) => (
   <span
     className={`inline-flex items-center gap-1.5 rounded-full font-semibold ring-1 ring-inset ${
-      large ? "px-4 py-2 text-sm" : "px-3 py-1 text-xs"
+      large ? "px-3 py-1 text-xs sm:text-sm" : "px-2.5 py-0.5 text-xs"
     } ${STATUS_STYLES[status] || "bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 ring-gray-600/10"}`}
   >
     {status || "Unknown"}

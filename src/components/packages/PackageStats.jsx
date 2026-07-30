@@ -42,32 +42,32 @@ const PackageStats = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
       {cards.map((card) => {
         const Icon = card.icon;
 
         return (
           <div
             key={card.title}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-700"
+            className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-700"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <p className="truncate text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wide uppercase">
                   {card.title}
                 </p>
 
-                <h2 className="mt-1 text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="mt-0.5 text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
                   {card.value}
                 </h2>
               </div>
 
               <div
-                className={`rounded-xl p-2.5 ${card.bg}`}
+                className={`shrink-0 rounded-lg p-2 ${card.bg}`}
               >
                 <Icon
                   className={card.color}
-                  size={18}
+                  size={16}
                 />
               </div>
             </div>

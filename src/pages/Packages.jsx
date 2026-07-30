@@ -58,20 +58,20 @@ const Packages = () => {
   }, [search, statusFilter, setCurrentPage]);
 
   return (
-    <div className="space-y-4 md:space-y-5">
+    <div className="space-y-3 sm:space-y-4">
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 xs:flex-row xs:items-center xs:justify-between">
 
-        <h1 className="text-xl font-bold text-[#231F20] dark:text-white">
+        <h1 className="text-lg sm:text-xl font-bold text-[#231F20] dark:text-white">
           Packages
         </h1>
 
         <button
           onClick={handleAddPackage}
-          className="flex items-center gap-2 rounded-xl bg-[#231F20] dark:bg-zinc-800 hover:bg-[#3a3335] dark:hover:bg-zinc-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200"
+          className="flex items-center justify-center gap-1.5 rounded-lg bg-[#231F20] dark:bg-zinc-800 hover:bg-[#3a3335] dark:hover:bg-zinc-700 px-3 py-1.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition-all duration-200 whitespace-nowrap"
         >
-          <Plus size={16} />
-          Add Package
+          <Plus size={14} className="shrink-0" />
+          <span>Add Package</span>
         </button>
 
       </div>
@@ -85,11 +85,13 @@ const Packages = () => {
         setStatusFilter={setStatusFilter}
       />
 
-      <PackagesTable
-        packages={paginatedPackages}
-        onEdit={handleEditPackage}
-        loading={loading}
-      />
+      <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0">
+        <PackagesTable
+          packages={paginatedPackages}
+          onEdit={handleEditPackage}
+          loading={loading}
+        />
+      </div>
 
       {/* Pagination */}
       <Pagination

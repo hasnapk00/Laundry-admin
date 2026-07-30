@@ -1,5 +1,12 @@
 import { createContext, useContext, useMemo, useState } from "react";
-import { couponsData } from "../coupons";
+import {
+  getCoupons,
+  getCouponById,
+  createCoupon,
+  updateCoupon as updateCouponApi,
+  deleteCoupon as deleteCouponApi,
+  updateCouponStatus as updateCouponStatusApi,
+} from "../api/couponApi";
 
 const CouponContext = createContext();
 
@@ -10,11 +17,15 @@ export const CouponProvider = ({ children }) => {
   const fetchCoupons = async () => {
     setLoading(true);
     try {
-      // TODO: Replace with backend API call (e.g. axios.get("/api/coupons"))
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setCoupons(couponsData);
+      const res = await getCoupons();
+      if (res.data.isSuccess) {
+        setCoupons(res.data.data);
+      } else {
+        setCoupons([]);
+      }
     } catch (error) {
-      console.error("Failed to fetch coupons:", error);
+      console.error(error);
+      setCoupons([]);
     } finally {
       setLoading(false);
     }
@@ -36,10 +47,7 @@ export const CouponProvider = ({ children }) => {
       active: coupons.filter((c) => c.status === "Active").length,
       scheduled: coupons.filter((c) => c.status === "Scheduled").length,
       expired: coupons.filter((c) => c.status === "Expired").length,
-      redeemed: coupons.reduce(
-        (total, coupon) => total + coupon.usedCount,
-        0
-      ),
+      redeemed: coupons.reduce((total, coupon) => total + coupon.usedCount, 0),
     };
   }, [coupons]);
 
@@ -48,62 +56,76 @@ export const CouponProvider = ({ children }) => {
   const filteredCoupons = useMemo(() => {
     return coupons.filter((coupon) => {
       const searchMatch =
-        coupon.name.toLowerCase().includes(search.toLowerCase()) ||
-        coupon.code.toLowerCase().includes(search.toLowerCase());
+        coupon.couponName?.toLowerCase().includes(search.toLowerCase()) ||
+        coupon.couponCode?.toLowerCase().includes(search.toLowerCase());
 
-      const statusMatch =
-        statusFilter === "All" ||
-        coupon.status === statusFilter;
+      const statusMatch = statusFilter === "All" || coupon.status === statusFilter;
 
       const discountMatch =
-        discountTypeFilter === "All" ||
-        coupon.discountType === discountTypeFilter;
+        discountTypeFilter === "All" || coupon.discountType === discountTypeFilter;
 
       const customerMatch =
-        customerTypeFilter === "All" ||
-        coupon.customerType === customerTypeFilter;
+        customerTypeFilter === "All" || coupon.customerType === customerTypeFilter;
 
-      return (
-        searchMatch &&
-        statusMatch &&
-        discountMatch &&
-        customerMatch
-      );
+      return searchMatch && statusMatch && discountMatch && customerMatch;
     });
-  }, [
-    coupons,
-    search,
-    statusFilter,
-    discountTypeFilter,
-    customerTypeFilter,
-  ]);
+  }, [coupons, search, statusFilter, discountTypeFilter, customerTypeFilter]);
 
   /* ---------------------------- CRUD ---------------------------- */
 
-  const addCoupon = (coupon) => {
-    setCoupons((prev) => [
-      {
-        ...coupon,
-        id: `CPN${Date.now()}`,
-      },
-      ...prev,
-    ]);
+  const addCoupon = async (coupon) => {
+    try {
+      await createCoupon(coupon);
+      await fetchCoupons();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   };
 
-  const updateCoupon = (updatedCoupon) => {
-    setCoupons((prev) =>
-      prev.map((coupon) =>
-        coupon.id === updatedCoupon.id
-          ? updatedCoupon
-          : coupon
-      )
-    );
+  // const updateCoupon = async (coupon) => {
+  //   try {
+  //     await updateCouponApi(coupon.couponID, coupon);
+  //     await fetchCoupons();
+  //     return true;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return false;
+  //   }
+  // };
+
+  const updateCoupon = async (coupon) => {
+  try {
+    await updateCouponApi(coupon.couponID, coupon);
+    await fetchCoupons();
+    return true;
+  } catch (error) {
+    console.error("Update coupon failed:", error.response?.data || error.message);
+    return false;
+  }
+};
+
+  const deleteCoupon = async (couponID) => {
+    try {
+      await deleteCouponApi(couponID);
+      await fetchCoupons();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   };
 
-  const deleteCoupon = (id) => {
-    setCoupons((prev) =>
-      prev.filter((coupon) => coupon.id !== id)
-    );
+  const updateCouponStatus = async (couponID, status) => {
+    try {
+      await updateCouponStatusApi(couponID, status);
+      await fetchCoupons();
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   };
 
   /* ---------------------------- Modal ---------------------------- */
@@ -127,11 +149,7 @@ export const CouponProvider = ({ children }) => {
 
   const generateCouponCode = () => {
     const prefix = "LDY";
-    const random = Math.random()
-      .toString(36)
-      .substring(2, 8)
-      .toUpperCase();
-
+    const random = Math.random().toString(36).substring(2, 8).toUpperCase();
     return `${prefix}-${random}`;
   };
 
@@ -171,6 +189,7 @@ export const CouponProvider = ({ children }) => {
         deleteCoupon,
 
         generateCouponCode,
+        updateCouponStatus,
       }}
     >
       {children}
@@ -182,9 +201,7 @@ export const useCoupon = () => {
   const context = useContext(CouponContext);
 
   if (!context) {
-    throw new Error(
-      "useCoupon must be used within CouponProvider"
-    );
+    throw new Error("useCoupon must be used within CouponProvider");
   }
 
   return context;

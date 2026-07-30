@@ -16,34 +16,34 @@ const TrackingHeader = ({ order }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mb-6">
+    <div className="mb-4 sm:mb-6">
       {/* Back Button */}
       <button
         onClick={() => navigate("/tracking")}
-        className="mb-4 flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-[#E8A843] dark:hover:text-[#E8A843] transition-colors"
+        className="mb-3 sm:mb-4 flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-[#E8A843] dark:hover:text-[#E8A843] transition-colors"
       >
         <ArrowLeft size={16} />
         Back to Tracking
       </button>
 
       {/* Header */}
-      <div className="flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-4 shadow-sm md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E8A843]/10 text-[#E8A843]">
-            <Package size={20} />
+      <div className="flex flex-col gap-3 sm:gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-3.5 sm:p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-[#E8A843]/10 text-[#E8A843] shrink-0">
+            <Package size={18} className="sm:w-5 sm:h-5" />
           </div>
-          <div>
-            <h1 className="text-lg font-bold text-gray-900 dark:text-white">
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">
               Order Tracking
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">
               Order <span className="font-semibold text-gray-700 dark:text-gray-300">#{order.id}</span>
             </p>
           </div>
         </div>
 
         <span
-          className={`inline-flex w-fit rounded-full px-3 py-1.5 text-xs font-semibold ${
+          className={`inline-flex w-fit shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${
             statusStyles[order.status] || "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
           }`}
         >

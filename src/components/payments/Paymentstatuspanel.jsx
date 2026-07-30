@@ -19,7 +19,7 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (payment) setSelected(payment.status);
+    if (payment) setSelected(payment.paymentStatus);
   }, [payment]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
 
   if (!payment) return null;
 
-  const hasChanged = selected !== payment.status;
+  const hasChanged = selected !== payment.paymentStatus;
 
   const handleSave = async () => {
     if (!hasChanged) {
@@ -51,13 +51,13 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        className={`fixed inset-0 z-40 bg-black/30 transition-opacity duration-300 ${
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-        onClick={saving ? undefined : onClose}
-      />
+    {/* Backdrop */}
+<div
+  className={`fixed inset-0 z-40 bg-transparent transition-opacity duration-300 ${
+    isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+  }`}
+  onClick={saving ? undefined : onClose}
+/>
 
       {/* Panel */}
       <div
@@ -70,56 +70,56 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
       >
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-5 py-4">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-4 py-3">
+            <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
               Update Payment Status
             </h2>
             <button
               onClick={onClose}
               disabled={saving}
-              className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300 transition-colors disabled:opacity-50"
+              className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300 transition-colors disabled:opacity-50"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
 
           {/* Body */}
-          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-6">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
             {/* Payment summary */}
-            <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/40 p-4 space-y-2.5">
-              <div className="flex items-center justify-between text-sm">
+            <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/40 p-3 space-y-2">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-500 dark:text-gray-400">Payment ID</span>
-                <span className="font-medium text-gray-900 dark:text-white">
-                  {payment.paymentId}
+                <span className="truncate font-medium text-gray-900 dark:text-white">
+                  {payment.paymentId || "-"}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-500 dark:text-gray-400">Order ID</span>
-                <span className="font-medium text-gray-900 dark:text-white">
-                  {payment.orderId}
+                <span className="truncate font-medium text-gray-900 dark:text-white">
+{payment.orderId}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-500 dark:text-gray-400">Customer</span>
-                <span className="font-medium text-gray-900 dark:text-white">
-                  {payment.customer}
+                <span className="truncate font-medium text-gray-900 dark:text-white">
+                  {payment.customerName}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-500 dark:text-gray-400">Amount</span>
                 <span className="flex items-center gap-0.5 font-semibold text-[#E8A843]">
-                  <IndianRupee size={13} />
-                  {payment.amount}
+                  <IndianRupee size={12} />
+                  {payment.totalAmount}
                 </span>
               </div>
             </div>
 
             {/* Status options */}
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Select New Status
               </p>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {STATUS_OPTIONS.map((opt) => {
                   const isActive = selected === opt.value;
                   return (
@@ -127,17 +127,17 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
                       key={opt.value}
                       onClick={() => setSelected(opt.value)}
                       disabled={saving}
-                      className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition-all duration-150 disabled:opacity-60 ${
+                      className={`flex w-full items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition-all duration-150 disabled:opacity-60 ${
                         isActive
                           ? `border-transparent ${opt.bg} ring-2 ${opt.ring} text-gray-900 dark:text-white`
                           : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50"
                       }`}
                     >
-                      <span className="flex items-center gap-2.5">
+                      <span className="flex items-center gap-2">
                         <span className={`h-2 w-2 rounded-full ${opt.dot}`} />
                         {opt.value}
                       </span>
-                      {isActive && <Check size={16} className="text-[#E8A843]" />}
+                      {isActive && <Check size={15} className="text-[#E8A843]" />}
                     </button>
                   );
                 })}
@@ -146,22 +146,22 @@ const PaymentStatusPanel = ({ isOpen, payment, onClose, onSave }) => {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center gap-3 border-t border-gray-200 dark:border-gray-800 px-5 py-4">
+          <div className="flex items-center gap-2 border-t border-gray-200 dark:border-gray-800 px-4 py-3">
             <button
               onClick={onClose}
               disabled={saving}
-              className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-60"
+              className="flex-1 rounded-lg border border-gray-200 dark:border-gray-700 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-60"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={saving || !hasChanged}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#E8A843] py-2.5 text-sm font-semibold text-white hover:bg-[#d49a3a] transition-colors disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#E8A843] py-2 text-sm font-semibold text-white hover:bg-[#d49a3a] transition-colors disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
             >
               {saving ? (
                 <>
-                  <Loader2 size={16} className="animate-spin" />
+                  <Loader2 size={15} className="animate-spin" />
                   Saving...
                 </>
               ) : (
